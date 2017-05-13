@@ -1,1 +1,1 @@
-f="$HOME"/.bashrc && [[ -f "$f" ]] && source "$f"
+../__common__/.bash_profile

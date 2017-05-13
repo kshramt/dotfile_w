@@ -1,4 +1,1 @@
-set bell-style off
-set completion-ignore-case on
-set completion-query-items 400
-set colored-stats on
+../__common__/.inputrc
