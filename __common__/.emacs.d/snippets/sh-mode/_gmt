@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: gmt
+# key: _gmt
+# --
+rm -fr .gmtdefault*
+GMT gmtset PAPER_MEDIA a4+
+GMT gmtset PAGE_ORIENTATION portrait
+GMT gmtset MEASURE_UNIT cm
+GMT gmtset PLOT_DEGREE_FORMAT D
+GMT gmtset BASEMAP_TYPE inside

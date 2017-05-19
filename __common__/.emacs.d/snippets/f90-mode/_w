@@ -1,0 +1,5 @@
+# contributor: me
+# name: write (output_unit, *)
+# key: _w
+# --
+write(${1:output_unit}, ${2:*}) $0

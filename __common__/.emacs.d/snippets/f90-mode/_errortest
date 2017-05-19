@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: errortest
+# key: _errortest
+# --
+program `(substring (file-name-nondirectory (buffer-file-name)) 0 -4)`
+   use, intrinsic:: iso_fortran_env, only: INPUT_UNIT, OUTPUT_UNIT, ERROR_UNIT
+   use:: `(substring (file-name-nondirectory (buffer-file-name)) 0 -9)`
+
+   implicit none
+
+   $0
+
+   write(OUTPUT_UNIT, *) 'FAIL: ', __FILE__
+
+   stop
+end program `(substring (file-name-nondirectory (buffer-file-name)) 0 -4)`

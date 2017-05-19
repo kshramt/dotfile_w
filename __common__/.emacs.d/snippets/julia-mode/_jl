@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: jl
+# key: _jl
+# --
+#!/usr/bin/env julia
+
+$0
+
+
+function main(args)
+end
+
+
+function _usage_and_exit(s=1)
+    io = s == 0 ? STDOUT : STDERR
+    println(io, "$PROGRAM_FILE")
+    exit(s)
+end
+
+
+if abspath(PROGRAM_FILE) == abspath(@__FILE__)
+    main(ARGS)
+end

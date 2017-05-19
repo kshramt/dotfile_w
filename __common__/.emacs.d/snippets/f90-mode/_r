@@ -1,0 +1,5 @@
+# contributor: me
+# name: read (input_unit, *)
+# key: _r
+# --
+read(${1:input_unit}, ${2:*}) $0

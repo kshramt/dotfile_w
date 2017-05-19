@@ -1,0 +1,7 @@
+# contributor: A. K.
+# name: subroutine
+# key: _f
+# --
+function $1($2) result(${3:ret})
+   $0
+end function $1

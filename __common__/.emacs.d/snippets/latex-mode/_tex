@@ -1,0 +1,47 @@
+# -*- mode: snippet -*-
+# name: _tex
+# key: _tex
+# --
+\RequirePackage[l2tabu, orthodox]{nag}
+\RequirePackage{luatex85}
+\documentclass{ltjsarticle}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\usepackage{xcolor}
+\usepackage{verbatim}
+\usepackage{amsmath, amssymb}
+\usepackage{mathtools}
+\usepackage{lineno}
+\usepackage{natbib}
+\usepackage{graphicx}
+%\usepackage{tocloft}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{breakurl}
+\usepackage{siunitx}
+% \newcommand\hmmax{0}
+% \newcommand\bmmax{0}
+\usepackage{bm}
+
+\newcommand{\tr}[1]{\ensuremath{\,{}^{t}\!#1}}
+\newcommand{\dd}[1]{\ensuremath{d#1}}
+
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\pr}{(}{)}
+
+\DeclareMathOperator{\ave}{E}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{}
+
+\end{document}

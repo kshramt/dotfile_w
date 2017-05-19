@@ -1,0 +1,4 @@
+# name: allocate(array())
+# key: _a
+# --
+allocate($1($0))

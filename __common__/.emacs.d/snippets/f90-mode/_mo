@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: module
+# key: _mo
+# --
+module `(substring (file-name-nondirectory (buffer-file-name)) 0 -4)`
+   use, intrinsic:: iso_fortran_env, only: input_unit, output_unit, error_unit
+
+   implicit none
+
+   private
+   public:: $1
+
+   ! Interface
+
+contains
+
+   $0
+end module `(substring (file-name-nondirectory (buffer-file-name)) 0 -4)`

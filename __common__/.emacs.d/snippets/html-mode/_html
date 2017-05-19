@@ -1,0 +1,58 @@
+# name: html
+# key: _html
+# --
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="hands">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>$1</title>
+  <style type="text/css">
+    pre, code, samp {
+      white-space: pre-wrap;
+    }
+
+    pre {
+      border-style: solid;
+      border-width: 1px;
+      border-radius: 1ex;
+      padding: 2ex;
+    }
+
+    body {
+      margin: auto;
+      padding: 1ex;
+      max-width: 102ex;
+      font-family: serif;
+    }
+    p{
+      line-height: 170%;
+    }
+    img, embed {
+      width: 100%;
+      max-width: 75ex;
+      height: auto;
+    }
+    h1, h2, h3, h4, h5 {
+      font-family: sans-serif;
+    }
+    h1:first-child {
+      border-top: 0;
+      margin-top: 1ex;
+      padding-top: 0;
+    }
+    h1 {
+      border-top: 1px solid gray;
+      margin-top: 2ex;
+      padding-top: 1ex;
+    }
+  </style>
+</head>
+<body>
+<h1>$2</h1>
+<p>
+$3
+</p>
+</body>
+</html>

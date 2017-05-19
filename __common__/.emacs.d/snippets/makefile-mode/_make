@@ -1,0 +1,110 @@
+# -*- mode: snippet -*-
+# name: make
+# key: _make
+# --
+# non-recursive make
+rest = \$(wordlist 2, \$(words \$(1)), \$(1))
+
+define include_template =
+__name := \$(1)
+d := \$\$(firstword \$\$(__dir_stack))/\$\$(__name)
+__task_name := \$\$(firstword \$\$(__task_name_stack))-\$\$(__name)
+.PHONY: \$\$(__task_name)
+__dir_stack := \$\$(d) \$\$(__dir_stack)
+__task_name_stack := \$\$(__task_name) \$\$(__task_name_stack)
+include \$\$(d)/main.make
+__dir_stack := \$\$(call rest,\$\$(__dir_stack))
+__task_name_stack := \$\$(call rest,\$\$(__task_name_stack))
+endef
+
+add = \$(eval \$(call include_template,\$(1)))
+
+__root_dir := .
+d := \$(__root_dir)
+__dir_stack := \$(d)
+__task_name_stack := all
+
+
+# Constants
+DEPS :=
+
+PYTHON := python3
+RUBY := ruby2
+SHA256SUM := sha256sum
+
+# Configurations
+.SUFFIXES:
+.DELETE_ON_ERROR:
+.SECONDARY:
+.ONESHELL:
+export SHELL := /bin/bash
+export SHELLOPTS := pipefail:errexit:nounset:noclobber
+
+# Functions
+sha256 = \$(1:%=%.sha256)
+unsha256 = \$(1:%.sha256=%)
+
+cart_prod_2 = \$(foreach x,\$(1),\$(addprefix \$(x),\$(2)))
+
+addps = \$(addprefix \$(1),\$(addsuffix \$(2),\$(3)))
+
+join_ = \$(subst \$(eval ) ,\$(1),\$(2))
+
+parse_stem = \$(subst /, ,\$(subst @,=,\$(1)))
+declare = declare -r \$(call parse_stem,\$(1))
+args = \$(addprefix --,\$(call parse_stem,\$(1)))
+get! = \$(wordlist 2,2,\$(subst =, ,\$(filter \$(1)=%,\$(call parse_stem,\$(2)))))
+get = \$(if \$(call get!,\$(1),\$(2)),\$(call get!,\$(1),\$(2)),\$(error \$(1) is not in \$(2)))
+del = \$(foreach x,\$(2),\$(call join_,/,\$(subst =,@,\$(filter-out \$(addsuffix =%,\$(1)),\$(call parse_stem,\$(x))))))
+
+
+patsubst_multi = \$(foreach target,\$(2), \
+	            \$(patsubst \$(1),\$(target),\$(3)))
+
+
+# Tasks
+.PHONY: all deps
+.DEFAULT_GOAL := all
+all: deps
+deps: \$(DEPS:%=dep/%.updated)
+
+# Rules
+
+define deps_rule_template =
+dep/\$(1)/%.sha256: dep/\$(1)/%.sha256.new
+	@cmp -s \$\$< \$\$@ || cp -f \$\$< \$\$@
+
+dep/\$(1)/%.sha256.new: dep/\$(1)/%
+	\$(SHA256SUM) \$\$< >| \$\$@
+
+dep/\$(1)/%.exe: dep/\$(1).updated ;
+dep/\$(1)/%.f90: dep/\$(1).updated ;
+dep/\$(1)/%.py: dep/\$(1).updated ;
+dep/\$(1)/%.rb: dep/\$(1).updated ;
+dep/\$(1)/%.sh: dep/\$(1).updated ;
+endef
+\$(foreach f,\$(DEPS),\$(eval \$(call deps_rule_template,\$(f))))
+
+\$(DEPS:%=dep/%.updated): dep/%.updated: config/dep/%.ref dep/%.synced
+	cd \$(@D)/\$*
+	git fetch origin
+	git checkout "\$\$(cat \$(CURDIR)/\$<)"
+	cd \$(CURDIR)
+	if [[ -r dep/\$*/Makefile ]]; then
+	   \$(MAKE) -C dep/\$*
+	fi
+	touch \$@
+
+\$(DEPS:%=dep/%.synced): dep/%.synced: config/dep/%.uri | dep/%
+	cd \$(@D)/\$*
+	git remote remove origin
+	git remote add origin "\$\$(cat \$(CURDIR)/\$<)"
+	cd \$(CURDIR)
+	touch \$@
+
+\$(DEPS:%=dep/%): dep/%:
+	git init \$@
+	cd \$@
+	git remote add origin "\$\$(cat \$(CURDIR)/config/dep/\$*.uri)"
+
+# Specific to this project

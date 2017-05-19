@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: rb
+# key: _rb
+# --
+#!/usr/bin/ruby
+
+
+def usage_and_exit(s=1)
+  \$stderr.puts [File.basename(__FILE__)].join(' ')
+  exit s
+end
+
+
+$0

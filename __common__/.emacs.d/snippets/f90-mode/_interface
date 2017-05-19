@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: interface
+# key: _in
+# --
+interface $1
+   module procedure $1$0
+end interface${1:$(concat " " yas/text)}

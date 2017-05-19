@@ -1,0 +1,98 @@
+# -*- mode: snippet -*-
+# name: rake
+# key: _rake
+# --
+ENV['SHELL'] = '/bin/bash'
+ENV['SHELLOPTS'] = 'pipefail:errexit:nounset:noclobber'
+
+
+def fl(graph, &block)
+  names, deps =
+         case graph
+         when String
+           [graph, []]
+         when Hash
+           graph.first
+         when Enumerable
+           [graph, []]
+         else
+           fail "Not implemented: #{graph}"
+         end
+  deps = [deps] if deps.is_a? String
+  names = [names] unless names.is_a? Enumerable
+  fail "empty names for #{deps}" if names.empty?
+  first_name = names.first
+  if names.size == 1
+    file first_name => deps, &block
+  else
+    file first_name => deps do |t|
+      now = Time.now()
+      block.call(t)
+      FileUtils.touch t.name, :mtime => now
+    end
+    names[1..-1].to_a.each{|name|
+      file name => deps + [first_name] do |t|
+        unless File.exist?(name) and File.mtime(name) >= File.mtime(first_name)
+          sh "rm -fr #{first_name}"
+          fail "#{name} was not built with #{first_name}"
+        end
+      end
+    }
+  end
+end
+
+
+def run(t, cmd)
+  puts cmd
+  unless Rake::FileUtilsExt.nowrite_flag
+    ok = system(ENV['SHELL'], '-c', cmd)
+    status = \$?
+    status = Rake::PseudoStatus.new(1) if !ok && status.nil?
+    unless ok
+      sh "rm -fr #{t.name}"
+      fail "Command failed with status (#{status.exitstatus}):\n#{cmd}"
+    end
+  end
+end
+
+
+def path_of_dict(d)
+  File.join(
+    d.keys.sort().map{|k|
+      [
+        k.to_s,
+        path_of_val(d[k]),
+      ].join('~')
+    }
+  )
+end
+
+
+def path_of_val(v)
+  if v.is_a?(Array)
+    '[' + v.map{|x| path_of_val(x)}.join(',') + ']'
+  else
+    v.to_s
+  end
+end
+
+
+def fj(*xs)
+  File.join(xs.map(&:to_s)).
+    gsub(%r{//+}, '/').
+    gsub(%r{/(\./)+}, '/').
+    sub(%r{/\.$}, '/').
+    sub(%r{^\./}, '')
+end
+
+
+def copy_dict(d, ks)
+  ret = {}
+  ks.uniq.sort.each{|k|
+    ret[k] = d.fetch(k)
+  }
+  ret
+end
+
+
+$0

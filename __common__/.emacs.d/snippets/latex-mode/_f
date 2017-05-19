@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: _f
+# key: _f
+# --
+\begin{figure}[ht]
+  \centering
+  \includegraphics[${1:options}]{figure/${2:path.pdf}}
+  \caption{\label{fig:${3:label}} $0}
+\end{figure}

@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: py
+# key: _py
+# --
+#!/usr/bin/python
+
+import sys
+# import re
+# import pickle
+
+# import scipy as sp
+# import matplotlib.pyplot as plt
+# import pandas as pd
+
+
+def main(argv):
+    $0
+
+
+def _usage_and_exit(s=1):
+    if s == 0:
+        fp = sys.stdout
+    else:
+        fp = sys.stderr
+    print('{}'.format(__file__), file=fp)
+    exit(s)
+
+
+if __name__ == '__main__':
+    main(sys.argv)

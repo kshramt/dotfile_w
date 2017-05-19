@@ -1,0 +1,42 @@
+# -*- mode: snippet -*-
+# name: zsh
+# key: _zsh
+# --
+#!/bin/zsh
+
+# set -xv
+setopt no_unset
+setopt err_exit
+setopt pipe_fail
+setopt no_clobber
+
+
+export IFS=\$' \t\n'
+export LANG=en_US.UTF-8
+umask u=rwx,g=,o=
+
+
+usage_and_exit(){
+   s="\${1:-1}"
+   msg="
+\${0##*/} $0
+"
+   if [[ \$s -eq 0 ]]; then
+      echo "\$msg"
+   else
+      echo "\$msg" >&2
+   fi
+   exit "\$s"
+}
+
+zmodload zsh/mathfunc
+
+
+readonly dir="\${0%/*}"
+readonly tmp_dir="\$(mktemp -d)"
+
+finalize(){
+   rm -fr "\$tmp_dir"
+}
+
+trap finalize EXIT

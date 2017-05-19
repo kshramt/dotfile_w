@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: test
+# key: _test
+# --
+program main
+   use, intrinsic:: iso_fortran_env, only: input_unit, output_unit, error_unit
+   use, non_intrinsic:: comparable_lib, only: almost_equal
+   use, non_intrinsic:: `(substring (file-name-nondirectory (buffer-file-name)) 0 -9)`
+
+   implicit none
+
+   $0
+
+   write(output_unit, *) 'SUCCESS: ', __FILE__
+
+   stop
+end program main
