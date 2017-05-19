@@ -1,0 +1,9 @@
+[flake8]
+max-line-length = 16000
+ignore = E226,E261,E265,E228,E111,E731,E225,E241,E402,E306
+
+# E731 do not assign lambda use def
+# E225 missing whitespace around operator
+# E241 multiple spaces after ','
+# E402 module level import not at the top of file
+# E306 expected 1 blank line before a nested definition
