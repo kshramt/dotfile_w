@@ -26,5 +26,9 @@ def _usage_and_exit(s=1):
     exit(s)
 
 
+def _dbg(*xs):
+    print(*xs, file=sys.stderr)
+
+
 if __name__ == '__main__':
     main(sys.argv)
