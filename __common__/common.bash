@@ -120,8 +120,8 @@ esac
 alias j='julia'
 alias m='\mkdir -p'
 alias t='\touch'
-alias less='\less -i'
-alias le='\less -i'
+alias less='\less -i -R'
+alias le='\less -i -R'
 alias tree='\tree -a'
 
 alias g='\git'
