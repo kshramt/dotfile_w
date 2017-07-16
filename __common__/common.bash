@@ -9,7 +9,7 @@ if [[ "$PROMPT_COMMAND" =~ \;\ *$ ]]; then
 else
    export PROMPT_COMMAND="${PROMPT_COMMAND:-:} ; history -a"
 fi
-export PROMPT_COMMAND="${PROMPT_COMMAND:-:} ; echo \"\$(date +%s)\" \"\$PWD\" >> \"\$HOME\"/.bash_location"
+export PROMPT_COMMAND="${PROMPT_COMMAND:-:} ; echo \"\$(date +%s)\" \"\$(hostname)\" \"\$PWD\" >> \"\$HOME\"/.bash_location"
 
 export LANG=en_US.UTF-8
 export TERM=xterm-256color
