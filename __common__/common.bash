@@ -147,10 +147,14 @@ fi
 
 # TeXLive
 
-export INFOPATH="$HOME"/usr/local/texlive/2016/texmf-dist/doc/info:"$INFOPATH"
-export MANPATH="$HOME"/usr/local/texlive/2016/texmf-dist/doc/man:"$MANPATH"
-export PATH="$HOME"/usr/local/texlive/2016/bin/x86_64-linux:"$PATH"
-export PATH="$HOME"/usr/local/texlive/2016/bin/x86_64-darwin:"$PATH"
+export INFOPATH="$HOME"/usr/local/texlive/2017/texmf-dist/doc/info:"$INFOPATH"
+export MANPATH="$HOME"/usr/local/texlive/2017/texmf-dist/doc/man:"$MANPATH"
+export PATH="$HOME"/usr/local/texlive/2017/bin/x86_64-linux:"$PATH"
+export PATH="$HOME"/usr/local/texlive/2017/bin/x86_64-darwin:"$PATH"
+
+# Local
+export MANPATH="$HOME"/usr/local/share/man:"$MANPATH"
+export PATH="$HOME"/usr/local/bin:"$HOME"/.local/bin:"$PATH"
 
 # HomeBrew
 
