@@ -20,6 +20,7 @@ shopt -s globstar
 shopt -s dirspell
 shopt -s cdspell
 shopt -s extglob
+shopt -s cmdhist
 set -o noclobber
 
 export OCTAVE_HISTSIZE=1000000000
