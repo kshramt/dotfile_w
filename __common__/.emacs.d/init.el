@@ -696,3 +696,25 @@
 (when (require 'julia-mode nil t)
   (setq auto-mode-alist (cons '("\\.jl$" . julia-mode) auto-mode-alist)))
 (require 'writegood-mode nil t)
+
+
+(defun initial-setup ()
+    (interactive)
+  (package-refresh-contents)
+  (dolist (pkg '(
+                 company
+                 elpy
+                 flycheck
+                 helm
+                 helm-git-grep
+                 jedi
+                 julia-mode
+                 magit
+                 markdown-mode
+                 undo-tree
+                 yasnippet
+                 ))
+    (unless (package-installed-p pkg)
+      (message pkg)
+      (ignore-errors
+        (package-install pkg)))))
