@@ -266,6 +266,8 @@
 (global-set-key (kbd "C-0") 'switch-to-next-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
+(add-hook 'focus-out-hook 'save-buffer)
+
 (run-with-idle-timer 1800 t
                      (lambda ()
                        (recentf-save-list)
