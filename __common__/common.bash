@@ -13,6 +13,7 @@ export PROMPT_COMMAND="${PROMPT_COMMAND:-:} ; { echo \"#\$(date +%s)\" ; echo \"
 
 export LANG=en_US.UTF-8
 export TERM=xterm-256color
+export EDITOR='em'
 
 # Options
 shopt -s autocd
