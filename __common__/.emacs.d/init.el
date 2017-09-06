@@ -208,7 +208,9 @@
  '(mode-line-buffer-id ((t (:weight normal))))
  '(mode-line-inactive ((t (:inherit mode-line :background "grey99" :foreground "grey20" :box (:line-width -1 :color "grey75") :weight light)))))
 
-(set-face-attribute 'default nil :height 150)
+(when (eq system-type 'darwin)
+  (set-face-attribute 'default nil :height 150)
+  )
 (when (require 'package nil t)
   (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
