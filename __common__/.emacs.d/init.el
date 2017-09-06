@@ -128,7 +128,6 @@
  '(markdown-command
    "pandoc --from=markdown --to=html5 --standalone --smart --mathml --self-contained")
  '(markdown-enable-math t)
- '(minibuffer-auto-raise t)
  '(mouse-scroll-delay 0.25)
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
  '(mouse-yank-at-point t)
