@@ -267,7 +267,10 @@
 (global-set-key (kbd "C-0") 'switch-to-next-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-(add-hook 'focus-out-hook 'save-buffer)
+(add-hook 'focus-out-hook (lambda ()
+                            (unless (buffer-modified-p)
+                                (if (buffer-file-name)
+                                    (save-buffer)))))
 
 (run-with-idle-timer 1800 t
                      (lambda ()
