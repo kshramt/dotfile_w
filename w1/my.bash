@@ -7,5 +7,5 @@ if [[ -n "$TMUX" ]] && [[ -z "${MY_LOGGING_TMUX:-}" ]]; then
    logging_tmux_dir="$HOME/d/log/tmux"
    mkdir -p "$logging_tmux_dir"
    logging_tmux_base="$(date +%y%m%d%H%M%S)_$$_#I_#P_$(echo "$PWD" | sed -e 's|/|!|g').log"
-   tmux pipe-pane "cat > \"${logging_tmux_dir}/${logging_tmux_base}\""
+   tmux pipe-pane -o "cat > \"${logging_tmux_dir}/${logging_tmux_base}\""
 fi
