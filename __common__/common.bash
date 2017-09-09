@@ -15,7 +15,7 @@ export LANG=en_US.UTF-8
 export TERM=xterm-256color
 export EDITOR='em'
 
-if which -s gsettings; then
+if which gsettings &> /dev/null; then
    gsettings set org.gnome.desktop.interface gtk-key-theme Emacs
 fi
 
