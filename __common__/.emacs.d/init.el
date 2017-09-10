@@ -177,7 +177,7 @@
  '(tex-use-reftex t)
  '(tool-bar-mode nil)
  '(tramp-auto-save-directory "~/.emacs.d/tramp/auto_save/")
- '(trash-directory "~/d/trash/")
+ '(trash-directory "~/d/trash/emacs-trash")
  '(undo-limit 400000)
  '(undo-outer-limit 20000000)
  '(undo-strong-limit 4000000)
