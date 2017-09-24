@@ -2,6 +2,8 @@ export PATH="$HOME/d/p/bin:$PATH"
 
 [[ -f "$HOME"/dotfile/.Xmodmap ]] && xmodmap "$HOME"/dotfile/.Xmodmap
 
+export XMODIFIERS=@im=fcitx
+
 if [[ -n "$TMUX" ]] && [[ -z "${MY_LOGGING_TMUX:-}" ]]; then
    export MY_LOGGING_TMUX="$$"
    logging_tmux_dir="$HOME/d/log/tmux"
