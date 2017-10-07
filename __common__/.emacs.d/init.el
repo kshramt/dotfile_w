@@ -355,20 +355,41 @@
 
 ; face
 
-(when (fboundp 'set-fontset-font)
-  (when (eq system-type 'darwin)
-    ;; (set-face-attribute 'default nil :family "Monaco")
-    ;; (set-face-attribute 'default nil :family "Courier")
-    ;; (set-face-attribute 'default nil :family "Noto Sans Mono CJK JP")
-    (set-face-attribute 'default nil :family "DejaVu Sans Mono")
-    )
+(run-at-time
+ 4 nil
+ (lambda ()
+   (if (eq system-type 'darwin)
+       (progn
+         (with-demoted-errors "error: %s"
+           (set-fontset-font "fontset-default" 'japanese-jisx0208 (font-spec :family "IPAexMincho"))
+           (set-fontset-font "fontset-default" '(#x3000 . #x30ff) (font-spec :family "IPAexMincho"))
+           )
 
-  ;; (set-fontset-font t 'japanese-jisx0208 (font-spec :family "IPAMincho"))
-  ;; (set-fontset-font t '(#x3000 . #x30ff) (font-spec :family "IPAMincho"))
-  (set-fontset-font t 'japanese-jisx0208 (font-spec :family "Noto Sans Mono CJK JP"))
-  (set-fontset-font t '(#x3000 . #x30ff) (font-spec :family "Noto Sans Mono CJK JP"))
-  )
+         (with-demoted-errors "error: %s"
+           (create-fontset-from-fontset-spec "-*-DejaVu Serif-normal-normal-condensed-*-*-*-*-*-p-*-fontset-text")
+           (set-fontset-font "fontset-text" 'japanese-jisx0208 (font-spec :family "IPAexMincho"))
+           (set-fontset-font "fontset-text" '(#x3000 . #x30ff) (font-spec :family "IPAexMincho"))
+           (set-face-attribute 'variable-pitch nil :font "fontset-text")
+           (set-face-font 'variable-pitch "fontset-text")
+           )
+         )
+     (progn
+       (with-demoted-errors "error: %s"
+         (set-fontset-font "fontset-default" 'japanese-jisx0208 (font-spec :family "IPAexMincho"))
+         (set-fontset-font "fontset-default" '(#x3000 . #x30ff) (font-spec :family "IPAexMincho"))
+         )
 
+       (with-demoted-errors "error: %s"
+         (create-fontset-from-fontset-spec "-*-DejaVu Serif-normal-normal-normal-*-*-*-*-*-*-*-fontset-text")
+         (set-fontset-font "fontset-text" 'japanese-jisx0208 (font-spec :family "IPAexMincho"))
+         (set-fontset-font "fontset-text" '(#x3000 . #x30ff) (font-spec :family "IPAexMincho"))
+         (set-face-attribute 'variable-pitch nil :font "fontset-text")
+         (set-face-font 'variable-pitch "fontset-text")
+         )
+       )
+     )
+   )
+ )
 
 ; my Functions
 
