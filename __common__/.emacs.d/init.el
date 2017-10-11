@@ -409,6 +409,12 @@
   (interactive)
   (revert-buffer :ignore-auto :noconfirm))
 
+(defun top ()
+  (interactive)
+  (recenter (min (max 0 scroll-margin)
+                 (truncate (/ (window-body-height) 4.0)))))
+(global-set-key (kbd "M-l") 'top)
+
 (define-derived-mode tsv-mode fundamental-mode "TSV"
   "Major mode for editing a TSV file."
   (setq-local indent-tabs-mode t)
