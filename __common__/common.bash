@@ -140,7 +140,7 @@ alias p='pry'
 alias gp='gnuplot -persist -e'
 alias ggrep='git grep'
 
-\stty stop ''
+[[ $- == *i* ]] && \stty stop ''
 # Change cursor color to red
 # printf '\033]12;red\033\\'
 
