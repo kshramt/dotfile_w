@@ -555,10 +555,36 @@
   (global-set-key (kbd "M-k") 'helm-git-grep-at-point)
   )
 
+(defun my-julia-indent-shift-left (start end &optional count)
+  (interactive
+   (if mark-active
+       (list (region-beginning) (region-end) current-prefix-arg)
+     (list (line-beginning-position) (line-end-position) current-prefix-arg)))
+  (if count
+      (setq count (prefix-numeric-value count))
+    (setq count julia-indent-offset))
+  (when (> count 0)
+    (let ((deactivate-mark nil))
+      (save-excursion
+        (goto-char start)
+        (indent-rigidly start end (- count))))))
+
+(defun my-julia-indent-shift-right (start end &optional count)
+  (interactive
+   (if mark-active
+       (list (region-beginning) (region-end) current-prefix-arg)
+     (list (line-beginning-position) (line-end-position) current-prefix-arg)))
+  (let ((deactivate-mark nil))
+    (setq count (if count (prefix-numeric-value count)
+                  julia-indent-offset))
+    (indent-rigidly start end count)))
+
 (with-eval-after-load 'julia-mode
   (setq julia-max-paren-lookback 20000)
   (setq julia-max-block-lookback 100000)
   (setq auto-mode-alist (cons '("\\.jl\\'" . julia-mode) auto-mode-alist))
+  (define-key julia-mode-map (kbd "C-c <") 'my-julia-indent-shift-left)
+  (define-key julia-mode-map (kbd "C-c >") 'my-julia-indent-shift-right)
   )
 
 (with-eval-after-load 'magit
