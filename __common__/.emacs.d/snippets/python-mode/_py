@@ -4,30 +4,90 @@
 # --
 #!/usr/bin/python
 
+import argparse
+import datetime
+import logging
+import os
 import sys
-# import re
 # import pickle
 
+# import numpy as np
 # import scipy as sp
 # import matplotlib.pyplot as plt
 # import pandas as pd
 
 
+__version__ = "0.1.0"
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+
+def _parse_argv(argv):
+    logger.debug(f"argv\t{argv}")
+    doc = f"""
+    {__file__}
+    """
+
+    _log_level_dict = dict(debug=logging.DEBUG, info=logging.INFO, warning=logging.WARNING, error=logging.ERROR, critical=logging.CRITICAL)
+
+    parser = argparse.ArgumentParser(doc, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"%(prog)s {__version__}",
+    )
+    parser.add_argument(
+        "--log-level",
+        default="warning",
+        type=lambda x: _log_level_dict[x],
+        help="Set log level.",
+    )
+    parser.add_argument(
+        "--log-file",
+        default=os.path.join(os.environ["HOME"], "d", "trash", "logging.py", datetime.datetime.now().strftime("%y%m%d%H%M%S") + "_" + __file__ + "_" + str(os.getpid()) + ".log"),
+        help="Set log file.",
+    )
+    args = parser.parse_args(argv)
+    logger.debug(f"args\t{args}")
+    return args
+
+
+def _add_handlers(logger, path):
+    fmt = logging.Formatter("%(levelname)s\t%(process)d\t%(asctime)s\t%(filename)s\t%(funcName)s\t%(lineno)d\t%(message)s")
+
+    hdl = logging.StreamHandler(sys.stderr)
+    hdl.setFormatter(fmt)
+    logger.addHandler(hdl)
+    hdl.setLevel(logging.INFO)
+    logger.addHandler(hdl)
+
+    _mkdir(_dirname(path))
+    hdl = logging.FileHandler(path)
+    hdl.setFormatter(fmt)
+    hdl.setLevel(logging.DEBUG)
+    logger.addHandler(hdl)
+
+    logger.info(f"log file\t{path}")
+    return logger
+
+
+def _mkdir(path):
+    os.makedirs(path, exist_ok=True)
+
+
+def _dirname(path):
+    return os.path.dirname(path) or os.path.curdir
+
+
+def run():
+    pass
+
+
 def main(argv):
-    $0
-
-
-def _usage_and_exit(s=1):
-    if s == 0:
-        fp = sys.stdout
-    else:
-        fp = sys.stderr
-    print("{}".format(__file__), file=fp)
-    exit(s)
-
-
-def _dbg(*xs):
-    print(*xs, file=sys.stderr)
+    args = _parse_argv(argv[1:])
+    _add_handlers(logger, args.log_file)
+    logger.info(f"args\t{args}")$0
+    run()
 
 
 if __name__ == "__main__":
