@@ -431,6 +431,24 @@
                 )
               auto-mode-alist))
 
+(defun my-todo-insert-entry ()
+  (interactive)
+  (insert "dict(
+        id=\"") (cl-loop repeat 14 do (insert (format "%x" (random 15)))) (insert "\", begin=") (my-todo-insert-time) (insert ", desc=\"\"\"
+        \"\"\",
+        est=,
+        parents=[],
+        times=[
+        ],
+    ),")
+  (previous-line 6)
+  (end-of-line)
+  )
+
+(defun my-todo-insert-time ()
+  (interactive)
+  (insert "\"") (insert-date-time) (insert "\""))
+
 ; package specific configurations
 
 (with-eval-after-load 'adoc-mode
