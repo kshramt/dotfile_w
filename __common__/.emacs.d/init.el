@@ -727,6 +727,7 @@
 (with-eval-after-load 'undo-tree
   (global-undo-tree-mode)
   (define-key undo-tree-map (kbd "M-_") 'undo-tree-redo)
+  (add-hook 'write-file-functions 'undo-tree-save-history-hook)
   )
 
 (with-eval-after-load 'writegood-mode
