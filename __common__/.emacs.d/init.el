@@ -113,6 +113,7 @@
  '(japanese-LaTeX-default-style "ltjsarticle")
  '(japanese-TeX-command-default "lualatex")
  '(jedi:complete-on-dot t)
+ '(jedi:use-shortcuts t)
  '(kill-ring-max 20000)
  '(kmacro-ring-max 32)
  '(large-file-warning-threshold 40000000)
@@ -784,11 +785,11 @@
   (package-refresh-contents)
   (dolist (pkg '(
                  company
+                 company-jedi
                  elpy
                  flycheck
                  helm
                  helm-git-grep
-                 jedi
                  julia-mode
                  magit
                  markdown-mode
