@@ -28,8 +28,6 @@ def _parse_argv(argv):
     {__file__}
     """
 
-    _log_level_dict = dict(debug=logging.DEBUG, info=logging.INFO, warning=logging.WARNING, error=logging.ERROR, critical=logging.CRITICAL)
-
     parser = argparse.ArgumentParser(doc, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument(
         "--version",
@@ -39,7 +37,7 @@ def _parse_argv(argv):
     parser.add_argument(
         "--log-level",
         default="warning",
-        type=lambda x: _log_level_dict[x],
+        type=lambda x: getattr(logging, x.upper()),
         help="Set log level.",
     )
     parser.add_argument(
