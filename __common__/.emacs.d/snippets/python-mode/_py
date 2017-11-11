@@ -42,7 +42,7 @@ def _parse_argv(argv):
     )
     parser.add_argument(
         "--log-file",
-        default=os.path.join(os.environ["HOME"], "d", "trash", "logging.py", datetime.datetime.now().strftime("%y%m%d%H%M%S") + "_" + __file__ + "_" + str(os.getpid()) + ".log"),
+        default=os.path.join(os.environ["HOME"], "d", "trash", "logging.py", datetime.datetime.now().strftime("%y%m%d%H%M%S") + "_" + str(os.getpid()) + "_" + os.path.basename(__file__) + ".log"),
         help="Set log file.",
     )
     args = parser.parse_args(argv)
