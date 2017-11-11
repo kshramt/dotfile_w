@@ -727,9 +727,9 @@
   )
 
 (with-eval-after-load 'undo-tree
-  (global-undo-tree-mode)
+  (global-undo-tree-mode t)
   (define-key undo-tree-map (kbd "M-_") 'undo-tree-redo)
-  (add-hook 'auto-save-hook (lambda () (undo-tree-save-history nil t)))
+  (add-hook 'auto-save-hook (lambda () (ignore-errors (undo-tree-save-history nil t))))
   )
 
 (with-eval-after-load 'writegood-mode
