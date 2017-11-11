@@ -483,13 +483,6 @@
   (add-to-list 'company-backends 'company-irony)
   )
 
-(with-eval-after-load 'company-jedi
-  (add-hook 'python-mode-hook
-            (lambda ()
-              (add-to-list 'company-backends 'company-jedi)
-              ))
-  )
-
 (with-eval-after-load 'dired
   (define-key dired-mode-map (kbd "C-t") 'other-window)
   (define-key dired-mode-map (kbd "q") (lambda ()
@@ -546,6 +539,13 @@
   ;; Only needed on Windows
   (when (eq system-type 'windows-nt)
     (setq w32-pipe-read-delay 0))
+  )
+
+(with-eval-after-load 'jedi
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (jedi:setup)
+              ))
   )
 
 (with-eval-after-load 'latex
@@ -785,11 +785,11 @@
   (package-refresh-contents)
   (dolist (pkg '(
                  company
-                 company-jedi
                  elpy
                  flycheck
                  helm
                  helm-git-grep
+                 jedi
                  julia-mode
                  magit
                  markdown-mode
