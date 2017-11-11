@@ -541,10 +541,11 @@
     (setq w32-pipe-read-delay 0))
   )
 
-(with-eval-after-load 'jedi
+(with-eval-after-load 'company-jedi
   (add-hook 'python-mode-hook
             (lambda ()
               (jedi:setup)
+              (add-to-list 'company-backends 'company-jedi)
               ))
   )
 
@@ -772,6 +773,7 @@
 (require 'recentf nil t)
 (require 'undo-tree nil t)
 (require 'company nil t)
+(require 'company-jedi nil t)
 (require 'yasnippet nil t)
 (require 'ess-site nil t)
 ;; julia-mode should be required after ess-site
@@ -785,11 +787,11 @@
   (package-refresh-contents)
   (dolist (pkg '(
                  company
+                 company-jedi
                  elpy
                  flycheck
                  helm
                  helm-git-grep
-                 jedi
                  julia-mode
                  magit
                  markdown-mode
