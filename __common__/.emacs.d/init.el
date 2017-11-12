@@ -734,7 +734,7 @@
   (global-undo-tree-mode t)
   (define-key undo-tree-map (kbd "M-_") 'undo-tree-redo)
   (add-hook 'auto-save-hook 'my-save-undo-tree)
-  (run-with-idle-timer 18 t (lambda () (add-hook 'auto-save-hook 'my-save-undo-tree)))
+  (run-with-idle-timer 600 t (lambda () (add-hook 'auto-save-hook 'my-save-undo-tree)))
   )
 
 (with-eval-after-load 'writegood-mode
