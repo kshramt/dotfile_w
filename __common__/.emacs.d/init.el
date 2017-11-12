@@ -183,6 +183,7 @@
  '(undo-outer-limit 20000000)
  '(undo-strong-limit 4000000)
  '(undo-tree-auto-save-history t)
+ '(undo-tree-enable-undo-in-region nil)
  '(undo-tree-history-directory-alist (quote (("." . "~/.emacs.d/undo-tree-history"))))
  '(undo-tree-visualizer-timestamps t)
  '(url-queue-timeout 10)
