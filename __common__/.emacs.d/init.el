@@ -727,13 +727,14 @@
                                               (buffer-file-name))))
   )
 
+(defun my-save-undo-tree ()
+  (ignore-errors (undo-tree-save-history nil t)))
+
 (with-eval-after-load 'undo-tree
   (global-undo-tree-mode t)
   (define-key undo-tree-map (kbd "M-_") 'undo-tree-redo)
-  (let ((f (lambda () (ignore-errors (undo-tree-save-history nil t)))))
-    (add-hook 'auto-save-hook f)
-    (run-with-idle-timer 1800 t (lambda () (add-hook 'auto-save-hook f)))
-    )
+  (add-hook 'auto-save-hook 'my-save-undo-tree)
+  (run-with-idle-timer 18 t (lambda () (add-hook 'auto-save-hook 'my-save-undo-tree)))
   )
 
 (with-eval-after-load 'writegood-mode
