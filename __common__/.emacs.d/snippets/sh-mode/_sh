@@ -4,33 +4,29 @@
 # --
 #!/bin/bash
 
-{
-   # set -xv
-   set -o nounset
-   set -o errexit
-   set -o pipefail
-   set -o noclobber
+# set -xv
+set -o nounset
+set -o errexit
+set -o pipefail
+set -o noclobber
 
-   export IFS=\$' \\t\\n'
-   export LANG=en_US.UTF-8
-   umask u=rwx,g=,o=
+export IFS=\$' \\t\\n'
+export LANG=en_US.UTF-8
+umask u=rwx,g=,o=
 
 
-   usage_and_exit(){
-      {
-         echo "\${0##*/}" $0
-      } >&2
-      exit "\${1:-1}"
-   }
-
-   readonly dir="\${0%/*}"
-   readonly tmp_dir="\$(mktemp -d)"
-
-   finalize(){
-      rm -fr "\$tmp_dir"
-   }
-
-   trap finalize EXIT
-
-   exit
+usage_and_exit(){
+   {
+      echo "\${0##*/}" $0
+   } >&2
+   exit "\${1:-1}"
 }
+
+readonly dir="\${0%/*}"
+readonly tmp_dir="\$(mktemp -d)"
+
+finalize(){
+   rm -fr "\$tmp_dir"
+}
+
+trap finalize EXIT
