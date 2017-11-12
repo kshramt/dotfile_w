@@ -730,7 +730,10 @@
 (with-eval-after-load 'undo-tree
   (global-undo-tree-mode t)
   (define-key undo-tree-map (kbd "M-_") 'undo-tree-redo)
-  (add-hook 'auto-save-hook (lambda () (ignore-errors (undo-tree-save-history nil t))))
+  (let ((f (lambda () (ignore-errors (undo-tree-save-history nil t)))))
+    (add-hook 'auto-save-hook f)
+    (run-with-idle-timer 1800 t (lambda () (add-hook 'auto-save-hook f)))
+    )
   )
 
 (with-eval-after-load 'writegood-mode
