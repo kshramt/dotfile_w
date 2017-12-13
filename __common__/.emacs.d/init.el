@@ -27,7 +27,7 @@
  '(TeX-source-correlate-mode t)
  '(abbrev-all-caps 1)
  '(auto-revert-interval 2)
- '(auto-save-interval 30)
+ '(auto-save-interval 10)
  '(auto-save-timeout 1)
  '(auto-save-visited-file-name t)
  '(bibtex-entry-kill-ring-max 4000)
