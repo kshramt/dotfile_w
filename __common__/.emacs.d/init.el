@@ -181,8 +181,6 @@
  '(undo-limit 400000)
  '(undo-outer-limit 20000000)
  '(undo-strong-limit 4000000)
- '(undo-tree-auto-save-history t)
- '(undo-tree-enable-undo-in-region nil)
  '(undo-tree-history-directory-alist (quote (("." . "~/.emacs.d/undo-tree-history"))))
  '(undo-tree-visualizer-timestamps t)
  '(url-queue-timeout 10)
@@ -726,14 +724,9 @@
                                               (buffer-file-name))))
   )
 
-(defun my-save-undo-tree ()
-  (ignore-errors (undo-tree-save-history nil t)))
-
 (with-eval-after-load 'undo-tree
   (global-undo-tree-mode t)
   (define-key undo-tree-map (kbd "M-_") 'undo-tree-redo)
-  (add-hook 'auto-save-hook 'my-save-undo-tree)
-  (run-with-idle-timer 600 t (lambda () (add-hook 'auto-save-hook 'my-save-undo-tree)))
   )
 
 (with-eval-after-load 'writegood-mode
