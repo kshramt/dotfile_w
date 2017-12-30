@@ -1,7 +1,7 @@
 # history
 shopt -s histappend
 export HISTFILESIZE=-1
-export HISTSIZE=1000000000
+export HISTSIZE=-1
 export HISTTIMEFORMAT='%FT%T%z'
 
 if [[ "$PROMPT_COMMAND" =~ \;\ *$ ]]; then

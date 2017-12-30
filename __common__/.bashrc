@@ -1,7 +1,7 @@
 # history is SO IMPORTANT
 shopt -s histappend
-export HISTFILESIZE=1000000000
-export HISTSIZE=1000000000
+export HISTFILESIZE=-1
+export HISTSIZE=-1
 export HISTTIMEFORMAT='%FT%T%z'
 
 f="${HOME}/dotfile/common.bash" && [[ -f "$f" ]] && source "$f"
