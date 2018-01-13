@@ -19,6 +19,9 @@ if which gsettings &> /dev/null; then
    gsettings set org.gnome.desktop.interface gtk-key-theme Emacs
 fi
 
+export INPUTRC="$HOME/dotfile/.inputrc"
+export TIGRC_USER="$HOME/dotfile/.tigrc"
+
 # Options
 shopt -s autocd
 shopt -s globstar
