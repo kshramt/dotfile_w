@@ -57,7 +57,7 @@ def _add_handlers(logger, path, level_stderr=logging.INFO, level_path=logging.DE
     hdl.setLevel(level_stderr)
     logger.addHandler(hdl)
 
-    _mkdir(_dirname(path))
+    mkdir(dirname(path))
     hdl = logging.FileHandler(path)
     hdl.setFormatter(fmt)
     hdl.setLevel(level_path)
@@ -71,11 +71,11 @@ def _conf_of(**kwargs):
     return collections.namedtuple("_Conf", kwargs.keys())(**kwargs)
 
 
-def _mkdir(path):
+def mkdir(path):
     os.makedirs(path, exist_ok=True)
 
 
-def _dirname(path):
+def dirname(path):
     return os.path.dirname(path) or os.path.curdir
 
 
