@@ -786,15 +786,19 @@
                  company-jedi
                  elpy
                  flycheck
+                 gnuplot
                  helm
                  helm-git-grep
+                 helm-swoop
                  julia-mode
                  magit
                  markdown-mode
+                 paredit
                  undo-tree
+                 writegood-mode
                  yasnippet
                  ))
     (unless (package-installed-p pkg)
-      (message pkg)
-      (ignore-errors
+      (message (symbol-name pkg))
+      (with-demoted-errors "error: %s"
         (package-install pkg)))))
