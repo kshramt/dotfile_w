@@ -10,4 +10,10 @@ if [[ -n "$TMUX" ]] && [[ -z "${MY_LOGGING_TMUX:-}" ]]; then
    mkdir -p "$logging_tmux_dir"
    logging_tmux_base="$(date +%y%m%d%H%M%S)_$$_#I_#P_$(echo "$PWD" | sed -e 's|/|!|g').log"
    tmux pipe-pane -o "cat > \"${logging_tmux_dir}/${logging_tmux_base}\""
+
+   while true
+   do
+      date +$'\n''now:%y%m%d%H%M%S'
+      sleep 3600
+   done &
 fi
