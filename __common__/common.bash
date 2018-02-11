@@ -17,6 +17,8 @@ export EDITOR='em'
 
 if which gsettings &> /dev/null; then
    gsettings set org.gnome.desktop.interface gtk-key-theme Emacs
+   gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ next-tab '<Primary>Tab'
+   gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ prev-tab '<Primary><Shift>Tab'
 fi
 
 export INPUTRC="$HOME/dotfile/.inputrc"
@@ -152,12 +154,6 @@ f="$HOME"/.opam/opam-init/init.sh
 if [[ -r "$f" ]]; then
    source "$f" > /dev/null 2> /dev/null || true
 fi
-
-
-
-
-gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ next-tab '<Primary>Tab'
-gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ prev-tab '<Primary><Shift>Tab'
 
 
 # TeXLive
