@@ -107,7 +107,7 @@ alias ll='\ls -alF --color=auto'
 alias di='\git diff'
 alias s='\git status --column'
 alias grep='\grep --color=auto'
-alias i='jupyter console'
+alias i='ipython3 --no-confirm-exit'
 
 case "$(uname)" in
    'Darwin')
