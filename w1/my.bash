@@ -13,7 +13,7 @@ if [[ -n "$TMUX" ]] && [[ -z "${MY_LOGGING_TMUX:-}" ]]; then
 
    while true
    do
-      echo "$(date +$'\n''now:%y%m%d%H%M%S'):$(dirs +0)"
+      echo "$(date +$'\n''now:%y%m%d%H%M%S')"
       sleep 3600
    done &
 fi
