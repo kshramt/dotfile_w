@@ -770,6 +770,8 @@
             (back-to-indentation))
         (delete-backward-char 1))))
 
+  (add-hook 'sql-mode-hook #'yas-minor-mode-on)
+
   (define-key sql-mode-map (kbd "C-j") 'my-sql-newline-and-indent)
   (define-key sql-mode-map (kbd "<tab>") 'my-sql-indent-line-function)
   (define-key sql-mode-map (kbd "DEL") 'my-sql-delete)
