@@ -724,6 +724,57 @@
                                               (buffer-file-name))))
   )
 
+(with-eval-after-load 'sql
+  (setq my-sql-indent-offset 3)
+
+  (defun my-sql-previous-indent-column ()
+    (save-restriction
+      (widen)
+      (cond
+       ((= (line-number-at-pos) 1) (- my-sql-indent-offset))
+       ((save-excursion
+          (previous-line)
+          (current-indentation))))))
+
+  (defun my-sql-previous-indent-level ()
+    (round (/ (float (my-sql-previous-indent-column)) my-sql-indent-offset)))
+
+  (defun my-sql-indent-line-function ()
+    (interactive "*")
+    (let ((follow-indentation-p (<= (point) (+ (line-beginning-position) (current-indentation))))
+          (ci (current-indentation))
+          (pl (my-sql-previous-indent-level)))
+      (save-excursion
+        (indent-line-to (if (= (% ci my-sql-indent-offset) 0)
+                            (let ((indentation+ (+ ci my-sql-indent-offset)))
+                              (if (> indentation+ (* (1+ pl) my-sql-indent-offset))
+                                  0
+                                indentation+))
+                          (* pl my-sql-indent-offset))))
+      (when follow-indentation-p
+        (back-to-indentation))))
+
+  (defun my-sql-newline-and-indent ()
+    (interactive "*")
+    (delete-horizontal-space t)
+    (newline nil t)
+    (indent-line-to (* (my-sql-previous-indent-level) my-sql-indent-offset)))
+
+  (defun my-sql-delete ()
+    (interactive "*")
+    (let ((c (current-column)))
+      (if (and (= c (current-indentation))
+               (> c 0))
+          (progn
+            (indent-line-to (* (1- (ceiling (/ (float c) my-sql-indent-offset))) my-sql-indent-offset))
+            (back-to-indentation))
+        (delete-backward-char 1))))
+
+  (define-key sql-mode-map (kbd "C-j") 'my-sql-newline-and-indent)
+  (define-key sql-mode-map (kbd "<tab>") 'my-sql-indent-line-function)
+  (define-key sql-mode-map (kbd "DEL") 'my-sql-delete)
+  )
+
 (with-eval-after-load 'undo-tree
   (global-undo-tree-mode t)
   (define-key undo-tree-map (kbd "M-_") 'undo-tree-redo)
@@ -776,6 +827,7 @@
 (when (require 'julia-mode nil t)
   (setq auto-mode-alist (cons '("\\.jl$" . julia-mode) auto-mode-alist)))
 (require 'writegood-mode nil t)
+(require 'sql nil t)
 
 
 (defun initial-setup ()
