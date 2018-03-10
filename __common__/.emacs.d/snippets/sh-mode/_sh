@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: sh
+# key: _sh
+# --
+#!/bin/sh
+
+# set -xv
+set -o nounset
+set -o errexit
+set -o noclobber
+
+export IFS=\$' \\t\\n'
+export LANG=en_US.UTF-8
+umask u=rwx,g=,o=
+
+
+usage_and_exit(){
+   {
+      echo "\${0##*/}" $0
+   } >&2
+   exit "\${1:-1}"
+}
+
+readonly dir="\${0%/*}"
+readonly tmp_dir="\$(mktemp -d)"
+
+finalize(){
+   rm -fr "\$tmp_dir"
+}
+
+trap finalize EXIT
