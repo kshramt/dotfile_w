@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: sh
-# key: _sh
+# name: bash
+# key: _bash
 # --
 #!/bin/bash
 
