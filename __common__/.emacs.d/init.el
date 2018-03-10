@@ -770,11 +770,36 @@
             (back-to-indentation))
         (delete-backward-char 1))))
 
+  (defun my-sql-indent-shift-left (start end &optional count)
+    (interactive
+     (if mark-active
+         (list (region-beginning) (region-end) current-prefix-arg)
+       (list (line-beginning-position) (line-end-position) current-prefix-arg)))
+    (setq count (if count (prefix-numeric-value count)
+                  my-sql-indent-offset))
+    (when (> count 0)
+      (let ((deactivate-mark nil))
+        (save-excursion
+          (goto-char start)
+          (indent-rigidly start end (- count))))))
+
+  (defun my-sql-indent-shift-right (start end &optional count)
+    (interactive
+     (if mark-active
+         (list (region-beginning) (region-end) current-prefix-arg)
+       (list (line-beginning-position) (line-end-position) current-prefix-arg)))
+    (let ((deactivate-mark nil))
+      (setq count (if count (prefix-numeric-value count)
+                    my-sql-indent-offset))
+      (indent-rigidly start end count)))
+
   (add-hook 'sql-mode-hook #'yas-minor-mode-on)
 
   (define-key sql-mode-map (kbd "C-j") 'my-sql-newline-and-indent)
   (define-key sql-mode-map (kbd "<tab>") 'my-sql-indent-line-function)
   (define-key sql-mode-map (kbd "DEL") 'my-sql-delete)
+  (define-key sql-mode-map (kbd "C-c <") 'my-sql-indent-shift-left)
+  (define-key sql-mode-map (kbd "C-c >") 'my-sql-indent-shift-right)
   )
 
 (with-eval-after-load 'undo-tree
