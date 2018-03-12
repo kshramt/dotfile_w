@@ -16,9 +16,9 @@ export TERM=xterm-256color
 export EDITOR='em'
 
 if which gsettings &> /dev/null; then
-   gsettings set org.gnome.desktop.interface gtk-key-theme Emacs
-   gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ next-tab '<Primary>Tab'
-   gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ prev-tab '<Primary><Shift>Tab'
+   gsettings set org.gnome.desktop.interface gtk-key-theme Emacs || :
+   gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ next-tab '<Primary>Tab' || :
+   gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ prev-tab '<Primary><Shift>Tab' || :
 fi
 
 export INPUTRC="$HOME/dotfile/.inputrc"
