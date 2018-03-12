@@ -35,14 +35,8 @@ set -o noclobber
 
 export OCTAVE_HISTSIZE=1000000000
 
-export MY_PANDOC=pandoc
-export MY_PANDOC_FLAGS='--mathml --standalone --smart --to=html5'
-
 export MY_EMACS='emacs'
 export MY_EAMCSCLIENT='emacsclient'
-
-export MY_PYTHON=python3
-export MY_PYFLAKES=pyflakes3
 
 # hunspell
 export DICTIONARY=en_US
