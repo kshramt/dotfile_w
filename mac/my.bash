@@ -1,5 +1,19 @@
 export PATH="$HOME/d/p/bin:$PATH"
 
+# HomeBrew
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
+export MANPATH="/usr/local/opt/gnu-getopt/share/man:$MANPATH"
+export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:$MANPATH"
+export PATH="/usr/local/opt/gnu-tar/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/gnu-tar/libexec/gnuman:$MANPATH"
+export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/findutils/libexec/gnuman:$MANPATH"
+export PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/make/libexec/gnuman:$MANPATH"
+
 [[ -f "$HOME"/dotfile/.Xmodmap ]] && xmodmap "$HOME"/dotfile/.Xmodmap
 
 export XMODIFIERS=@im=fcitx
