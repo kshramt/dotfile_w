@@ -1,6 +1,8 @@
 export PATH="$HOME/d/p/bin:$PATH"
 
 # HomeBrew
+export PATH="${HOME}"/Library/Python/3.6/bin:"${PATH}"
+
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
