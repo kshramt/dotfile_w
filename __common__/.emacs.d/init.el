@@ -560,6 +560,11 @@
   )
 
 (with-eval-after-load 'helm
+  ;; https://github.com/emacs-helm/helm/issues/1492#issuecomment-216520302
+  (defun helm-buffers-sort-transformer@donot-sort (_ candidates _)
+    candidates)
+  (advice-add 'helm-buffers-sort-transformer :around 'helm-buffers-sort-transformer@donot-sort)
+
   (global-set-key (kbd "M-@") 'helm-mini)
   (global-set-key (kbd "M-y") 'helm-show-kill-ring)
   (global-set-key (kbd "M-x") 'helm-M-x)
