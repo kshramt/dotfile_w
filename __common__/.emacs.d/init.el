@@ -189,6 +189,7 @@
  '(visible-bell nil)
  '(windmove-wrap-around t)
  '(winner-mode t)
+ '(word-wrap t)
  '(writeroom-fullscreen-effect (quote maximized))
  '(writeroom-global-effects
    (quote
