@@ -119,6 +119,7 @@
  '(longlines-auto-wrap nil)
  '(magit-auto-revert-immediately nil)
  '(magit-auto-revert-mode nil)
+ '(magit-blame-arguments (quote ("-w" "-C" "-C" "-C" "-M")))
  '(magit-diff-refine-hunk (quote all))
  '(magit-status-expand-stashes nil)
  '(magit-status-mode-hook (quote ((lambda nil (setq truncate-lines nil)))))
