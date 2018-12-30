@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 def main(argv):
     args = _parse_argv(argv[1:])
     _add_handlers(logger, args.log_file, level_stderr=args.log_level)
-    logger.debug(f"args\t{args}")$0
+    logger.debug("args\t%s", args)$0
     run()
 
 
@@ -34,7 +34,7 @@ def run():
 
 
 def _parse_argv(argv):
-    logger.debug(f"argv\t{argv}")
+    logger.debug("argv\t%s", argv)
     doc = f"""
     {__file__}
     """
@@ -44,7 +44,7 @@ def _parse_argv(argv):
     parser.add_argument("--log_level", default="warning", type=lambda x: getattr(logging, x.upper()), help="Set log level.")
     parser.add_argument("--log_file", default=os.path.join(os.environ["HOME"], "d", "trash", "logging.py", datetime.datetime.now().strftime("%y%m%d%H%M%S") + "_" + str(os.getpid()) + "_" + os.path.basename(__file__) + ".log"), help="Set log file.")
     args = parser.parse_args(argv)
-    logger.debug(f"args\t{args}")
+    logger.debug("args\t%s", args)
     return args
 
 
@@ -63,7 +63,7 @@ def _add_handlers(logger, path, level_stderr=logging.INFO, level_path=logging.DE
     hdl.setLevel(level_path)
     logger.addHandler(hdl)
 
-    logger.info(f"log file\t{path}")
+    logger.info("log file\t%s", path)
     return logger
 
 
@@ -77,6 +77,10 @@ def mkdir(path):
 
 def dirname(path):
     return os.path.dirname(path) or os.path.curdir
+
+
+def jp(path, *more):
+    return os.path.normpath(os.path.sep.join((path, os.path.sep.join(more))))
 
 
 if __name__ == "__main__":
