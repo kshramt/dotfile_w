@@ -4,6 +4,15 @@ export PATH="$HOME/d/p/bin:$PATH"
 
 export XMODIFIERS=@im=fcitx
 
+
+f="$HOME"/miniconda3/etc/profile.d/conda.sh
+if [[ -f "$f" ]]; then
+   source "$f"
+   conda deactivate
+   conda activate my
+fi
+
+
 if [[ -n "$TMUX" ]] && [[ -z "${MY_LOGGING_TMUX:-}" ]]; then
    export MY_LOGGING_TMUX="$$"
    logging_tmux_dir="$HOME/d/log/tmux"
