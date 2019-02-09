@@ -164,3 +164,14 @@ export PATH="$HOME"/usr/local/bin:"$HOME"/.local/bin:"$PATH"
 # HomeBrew
 
 export HOMEBREW_NO_ANALYTICS=1
+
+# Conda
+f="$HOME"/miniconda3/etc/profile.d/conda.sh
+if [[ -f "$f" ]]; then
+   source "$f"
+   { conda deactivate && conda activate my; } || :
+fi
+
+if which -s direnv; then
+   eval "$(direnv hook bash)"
+fi
