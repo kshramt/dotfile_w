@@ -4,7 +4,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(LaTeX-amsmath-label "eq:")
- '(LaTeX-command "pdflatex")
  '(LaTeX-command-style
    (quote
     (("" "%(latex) %(file-line-error) %(extraopts) %S%(PDFout)"))))
@@ -52,12 +51,16 @@
     (desktop-missing-file-warning tags-file-name tags-table-list search-ring regexp-search-ring register-alist file-name-history kill-ring minibuffer-history extended-command-history regexp-history)))
  '(desktop-restore-eager 1)
  '(desktop-save-mode t)
+ '(display-line-numbers t)
+ '(dumb-jump-mode t)
+ '(dumb-jump-selector (quote helm))
  '(echo-keystrokes 0)
- '(eldoc-idle-delay 1.5)
+ '(eldoc-idle-delay 0.5)
  '(electric-indent-mode nil)
  '(electric-layout-mode t)
  '(electric-pair-mode t)
  '(electric-pair-skip-self nil)
+ '(elpy-rpc-python-command "python3")
  '(epa-file-inhibit-auto-save nil)
  '(ess-eldoc-show-on-symbol t)
  '(eww-search-prefix "https://google.co.jp/search?q=")
@@ -113,7 +116,8 @@
  '(japanese-LaTeX-default-style "ltjsarticle")
  '(japanese-TeX-command-default "lualatex")
  '(jedi:complete-on-dot t)
- '(kill-ring-max 20000)
+ '(js-indent-level 2)
+ '(kill-ring-max 40000)
  '(kmacro-ring-max 32)
  '(large-file-warning-threshold 40000000)
  '(longlines-auto-wrap nil)
@@ -127,7 +131,7 @@
  '(make-backup-files nil)
  '(mark-ring-max 32)
  '(markdown-command
-   "pandoc --from=markdown --to=html5 --standalone --smart --mathml --self-contained")
+   "pandoc --from=markdown --to=html5 --standalone --mathml --self-contained")
  '(markdown-enable-math t)
  '(mouse-scroll-delay 0.25)
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
@@ -142,12 +146,15 @@
  '(pcomplete-ignore-case t)
  '(pdf-cache-image-limit 256)
  '(pdf-view-resize-factor 1.1)
+ '(prettier-js-args (quote ("--trailing-comma=all")))
  '(prettify-symbols-unprettify-at-point (quote right-edge))
  '(preview-auto-cache-preamble t)
  '(preview-default-document-pt 14.0)
  '(preview-default-option-list
    (quote
     ("displaymath" "floats" "graphics" "textmath" "footnotes" "showlabels")))
+ '(python-check-command "pyflakes")
+ '(python-shell-interpreter-args "")
  '(read-buffer-completion-ignore-case t)
  '(read-file-name-completion-ignore-case t)
  '(recentf-auto-cleanup (quote never))
@@ -177,7 +184,6 @@
  '(tab-width 6)
  '(tex-use-reftex t)
  '(tool-bar-mode nil)
- '(tramp-auto-save-directory "~/.emacs.d/tramp/auto_save/")
  '(trash-directory "~/d/trash/emacs-trash")
  '(undo-limit 400000)
  '(undo-outer-limit 20000000)
@@ -209,9 +215,12 @@
  '(mode-line-buffer-id ((t (:weight normal))))
  '(mode-line-inactive ((t (:inherit mode-line :background "grey99" :foreground "grey20" :box (:line-width -1 :color "grey75") :weight light)))))
 
+(ffap-bindings)
+
 (when (eq system-type 'darwin)
   (set-face-attribute 'default nil :height 140)
   )
+
 (when (require 'package nil t)
   (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
@@ -226,8 +235,6 @@
 ; end package.el
 
 ; core
-
-(ffap-bindings)
 
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
@@ -332,7 +339,7 @@
 ;; logging
 
 (defun log-history (msg)
-  (ignore-errors
+  (with-demoted-errors "error: %s"
     (let ((file-name (buffer-file-name)))
       (when (> (length file-name) 0)
         (append-to-file
@@ -351,25 +358,25 @@
 
 ;; mac
 
-(setq ns-command-modifier (quote meta))
-(setq ns-alternate-modifier (quote super))
+(setq ns-command-modifier 'meta)
+(setq ns-alternate-modifier 'super)
 
 ; face
 
 (run-at-time
- 4 nil
+ 20 nil
  (lambda ()
    (if (eq system-type 'darwin)
        (progn
          (with-demoted-errors "error: %s"
-           (set-fontset-font "fontset-default" 'japanese-jisx0208 (font-spec :family "IPAexMincho"))
-           (set-fontset-font "fontset-default" '(#x3000 . #x30ff) (font-spec :family "IPAexMincho"))
+           (set-fontset-font "fontset-default" 'japanese-jisx0208 (font-spec :family "Noto Serif CJK JP"))
+           (set-fontset-font "fontset-default" '(#x3000 . #x30ff) (font-spec :family "Noto Serif CJK JP"))
            )
 
          (with-demoted-errors "error: %s"
-           (create-fontset-from-fontset-spec "-*-DejaVu Serif-normal-normal-condensed-*-*-*-*-*-p-*-fontset-text")
-           (set-fontset-font "fontset-text" 'japanese-jisx0208 (font-spec :family "IPAexMincho"))
-           (set-fontset-font "fontset-text" '(#x3000 . #x30ff) (font-spec :family "IPAexMincho"))
+           (create-fontset-from-fontset-spec "-*-DejaVu Serif-normal-normal-normal-*-*-*-*-*-p-*-fontset-text")
+           (set-fontset-font "fontset-text" 'japanese-jisx0208 (font-spec :family "Noto Serif CJK JP"))
+           (set-fontset-font "fontset-text" '(#x3000 . #x30ff) (font-spec :family "Noto Serif CJK JP"))
            (set-face-attribute 'variable-pitch nil :font "fontset-text")
            (set-face-font 'variable-pitch "fontset-text")
            )
@@ -392,10 +399,11 @@
    )
  )
 
-; my Functions
+;; my Functions
 
 (setq my-key-minor-mode-map (make-keymap))
 (define-minor-mode my-key-minor-mode "" t "" 'my-key-minor-mode-map)
+
 
 (defun insert-date-time ()
   (interactive)
@@ -427,34 +435,28 @@
 
 (setq auto-mode-alist
       (append '(
+                ("\\.todo$" . my-todo-mode)
                 ("\\.tsv$" . tsv-mode)
+                ("\\.kv$" . tsv-mode)
                 ("\\.ltsv$" . tsv-mode)
+                ("\\.f90\\.params$" . tsv-mode)
                 )
               auto-mode-alist))
-
-(defun my-todo-insert-entry ()
-  (interactive)
-  (insert "dict(
-        id=\"") (cl-loop repeat 14 do (insert (format "%x" (random 15)))) (insert "\", begin=") (my-todo-insert-time) (insert ", desc=\"\"\"
-        \"\"\",
-        est=,
-        parents=[],
-        times=[
-        ],
-    ),")
-  (previous-line 6)
-  (end-of-line)
-  )
-
-(defun my-todo-insert-time ()
-  (interactive)
-  (insert "\"") (insert-date-time) (insert "\""))
 
 ; package specific configurations
 
 (with-eval-after-load 'adoc-mode
   (add-hook 'adoc-mode-hook #'flyspell-mode)
   (add-hook 'adoc-mode-hook 'writer)
+  (setq auto-mode-alist
+        (append '(
+                  ("\\.adoc$" . adoc-mode)
+                  )
+                auto-mode-alist))
+  )
+
+(with-eval-after-load 'blacken
+  (add-hook 'python-mode-hook 'blacken-mode)
   )
 
 (with-eval-after-load 'clojure-mode
@@ -473,6 +475,8 @@
   (define-key company-active-map (kbd "C-h") 'delete-backward-char)
   (add-hook 'after-init-hook 'global-company-mode)
   (add-hook 'text-mode-hook (lambda ()
+                              (variable-pitch-mode t)
+                              (writer)
                               (set (make-local-variable
                                     'company-idle-delay)
                                    0.275)
@@ -490,12 +494,9 @@
                                          (quit-window t)))
   )
 
-(with-eval-after-load 'elfeed
-  (setq elfeed-feeds
-        '(
-          "http://feeds.nature.com/nature/rss/current"
-          ))
-  (setq elfeed-search-filter "@6-months-ago +unread !Books !\\[Book")
+(with-eval-after-load 'dumb-jump
+  (global-set-key (kbd "M-k") 'dumb-jump-go)
+  (global-set-key (kbd "M-p") 'dumb-jump-back)
   )
 
 (with-eval-after-load 'elpy
@@ -561,6 +562,10 @@
                                ))
   )
 
+(with-eval-after-load 'lsp-mode
+  (add-hook 'python-mode-hook 'lsp)
+  )
+
 (with-eval-after-load 'helm
   ;; https://github.com/emacs-helm/helm/issues/1492#issuecomment-216520302
   (defun helm-buffers-sort-transformer@donot-sort (_ candidates _)
@@ -577,7 +582,7 @@
   )
 
 (with-eval-after-load 'helm-git-grep
-  (global-set-key (kbd "M-k") 'helm-git-grep-at-point)
+  ;; (global-set-key (kbd "M-k") 'helm-git-grep-at-point)
   )
 
 (defun my-julia-indent-shift-left (start end &optional count)
@@ -607,7 +612,7 @@
 (with-eval-after-load 'julia-mode
   (setq julia-max-paren-lookback 20000)
   (setq julia-max-block-lookback 100000)
-  (setq auto-mode-alist (cons '("\\.jl\\'" . julia-mode) auto-mode-alist))
+  (setq auto-mode-alist (cons '("\\.jl$" . julia-mode) auto-mode-alist))
   (define-key julia-mode-map (kbd "C-c <") 'my-julia-indent-shift-left)
   (define-key julia-mode-map (kbd "C-c >") 'my-julia-indent-shift-right)
   )
@@ -648,6 +653,7 @@
   (add-hook 'caml-mode-hook 'merlin-mode t)
   )
 
+
 (with-eval-after-load 'paredit
   (add-hook 'clojure-mode-hook #'enable-paredit-mode)
   (add-hook 'cider-mode-hook #'enable-paredit-mode)
@@ -676,6 +682,11 @@
                   ("\\.pdf$" . pdf-view-mode)
                   )
                 auto-mode-alist))
+  )
+
+(with-eval-after-load 'prettier-js
+  (add-hook 'rjsx-mode 'prettier-js-mode)
+  ;; (add-hook 'prettier-js-mode-hook (lambda () (add-hook 'auto-save-hook 'prettier-js nil 'local)))
   )
 
 (with-eval-after-load 'reftex-ref
@@ -722,6 +733,16 @@
 
 (with-eval-after-load 'reftex-vars
   (setq reftex-insert-label-flags '(nil nil))
+  )
+
+(with-eval-after-load 'rjsx-mode
+  (setq auto-mode-alist
+        (append '(
+                  ("\\.js$" . rjsx-mode)
+                  ("\\.ts$" . rjsx-mode)
+                  ("\\.tsx$" . rjsx-mode)
+                  )
+                auto-mode-alist))
   )
 
 (with-eval-after-load 'scheme-mode
@@ -814,6 +835,14 @@
   (define-key undo-tree-map (kbd "M-_") 'undo-tree-redo)
   )
 
+(with-eval-after-load 'web-mode
+  (setq auto-mode-alist
+        (append '(
+                  ("\\.html$" . web-mode)
+                  )
+                auto-mode-alist))
+  )
+
 (with-eval-after-load 'writegood-mode
   (add-hook 'LaTeX-mode-hook #'writegood-turn-on)
   (add-hook 'text-mode-hook (lambda ()
@@ -842,44 +871,56 @@
 (my-key-minor-mode t)
 
 ; activate essential packages
-(require 'elpy nil t)
+;; (require 'elpy nil t)
+(require 'blacken nil t)
 (require 'gnuplot nil t)
 (require 'helm nil t)
-(require 'helm-git-grep nil t)
 (require 'flycheck nil t)
+(require 'lsp-mode nil t)
 (require 'magit nil t)
 (require 'markdown-mode nil t)
+; (require 'migemo nil t)
 (require 'paredit nil t)
 (require 'pdf-tools nil t)
 (require 'recentf nil t)
 (require 'undo-tree nil t)
 (require 'company nil t)
-(require 'company-jedi nil t)
+;; (require 'company-jedi nil t)
+; (require 'company-ngram nil t)
 (require 'yasnippet nil t)
+(require 'web-mode nil t)
 (require 'ess-site nil t)
 ;; julia-mode should be required after ess-site
 (when (require 'julia-mode nil t)
   (setq auto-mode-alist (cons '("\\.jl$" . julia-mode) auto-mode-alist)))
+(require 'merlin nil t)
 (require 'writegood-mode nil t)
+(require 'dumb-jump nil t)
 (require 'sql nil t)
-
+(require 'rjsx-mode nil t)
+(require 'prettier-js nil t)
 
 (defun initial-setup ()
-    (interactive)
+  (interactive)
   (package-refresh-contents)
   (dolist (pkg '(
+                 blacken
                  company
-                 company-jedi
-                 elpy
+                 company-lsp
+                 dumb-jump
                  flycheck
                  gnuplot
                  helm
                  helm-git-grep
                  helm-swoop
                  julia-mode
+                 lsp-mode
+                 lsp-ui
                  magit
                  markdown-mode
                  paredit
+                 prettier-js
+                 rjsx-mode
                  undo-tree
                  writegood-mode
                  yasnippet
