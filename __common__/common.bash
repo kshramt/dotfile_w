@@ -172,6 +172,6 @@ if [[ -f "$f" ]]; then
    { conda deactivate && conda activate my; } || :
 fi
 
-if which -s direnv; then
+if which direnv &> /dev/null; then
    eval "$(direnv hook bash)"
 fi
