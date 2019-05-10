@@ -282,10 +282,7 @@
                                 (if (buffer-file-name)
                                     (save-buffer)))))
 
-(run-with-idle-timer 1800 t
-                     (lambda ()
-                       (recentf-save-list)
-                       ))
+(run-with-idle-timer 360 t 'recentf-save-list)
 
 (setq auto-mode-alist
       (append '(
