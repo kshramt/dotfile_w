@@ -3,6 +3,7 @@ export PATH="$HOME/d/p/bin:$PATH"
 [[ -f "$HOME"/dotfile/.Xmodmap ]] && xmodmap "$HOME"/dotfile/.Xmodmap
 
 export XMODIFIERS=@im=fcitx
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
 
 if [[ -n "$TMUX" ]] && [[ -z "${MY_LOGGING_TMUX:-}" ]]; then
