@@ -33,5 +33,30 @@ do
    ln -s dotfile/"$f"
 done
 
+cat <<EOF > ~/.gitconfig
+[user]
+	name = kshramt@$(hostname)
+	email = kshramt@$(hostname)
+[color]
+	ui = auto
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	nffm = merge --no-ff
+	wdiff = diff --word-diff -w
+[github]
+	user = kshramt
+[core]
+	quotepath = false
+EOF
+
+sudo add-apt-repository ppa:kelleyk/emacs
 sudo apt update
-sudo apt install tig tree
+sudo apt install tig tree emacs26
+
+emacs --batch --load ~/.emacs.d/init.el --eval '(initial-setup)'
+
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+~/.tmux/plugins/tpm/bin/install_plugins
