@@ -31,6 +31,7 @@
  '(auto-save-visited-file-name t)
  '(bibtex-entry-kill-ring-max 4000)
  '(bibtex-field-kill-ring-max 4000)
+ '(blacken-allow-py36 t)
  '(blink-matching-delay 0.1)
  '(case-fold-search t)
  '(column-number-mode t)
@@ -75,7 +76,7 @@
  '(fringe-mode 0 nil (fringe))
  '(garbage-collection-messages nil)
  '(gc-cons-percentage 1.0)
- '(gc-cons-threshold 40000000)
+ '(gc-cons-threshold 100000000)
  '(geiser-active-implementations (quote (guile)))
  '(geiser-default-implementation (quote guile))
  '(geiser-guile-binary "guile")
@@ -91,6 +92,7 @@
  '(haskell-stylish-on-save t)
  '(haskell-tags-on-save t)
  '(helm-ag-command-option "--smart-case")
+ '(helm-bookmark-show-location t)
  '(helm-buffer-max-length 30)
  '(helm-buffer-skip-remote-checking t)
  '(helm-candidate-number-limit 200)
@@ -121,6 +123,9 @@
  '(kmacro-ring-max 32)
  '(large-file-warning-threshold 40000000)
  '(longlines-auto-wrap nil)
+ '(lsp-auto-guess-root t)
+ '(lsp-prefer-flymake nil)
+ '(lsp-ui-doc-enable nil)
  '(magit-auto-revert-immediately nil)
  '(magit-auto-revert-mode nil)
  '(magit-blame-arguments (quote ("-w" "-C" "-C" "-C" "-M")))
@@ -159,8 +164,9 @@
  '(read-file-name-completion-ignore-case t)
  '(recentf-auto-cleanup (quote never))
  '(recentf-max-menu-items 20)
- '(recentf-max-saved-items 40000)
- '(recentf-save-file "~/.emacs.d/recentf")
+ '(recentf-max-saved-items 9999999)
+ '(recentf-mode t)
+ '(recentf-save-file "~/.emacs.d/my_recentf")
  '(reftex-cite-format (quote natbib))
  '(reftex-plug-into-AUCTeX (quote (t t t t t)))
  '(regexp-search-ring-max 512)
@@ -184,7 +190,9 @@
  '(tab-width 6)
  '(tex-use-reftex t)
  '(tool-bar-mode nil)
+ '(tramp-auto-save-directory "~/.emacs.d/tramp_auto_save/")
  '(trash-directory "~/d/trash/emacs-trash")
+ '(typescript-indent-level 2)
  '(undo-limit 400000)
  '(undo-outer-limit 20000000)
  '(undo-strong-limit 4000000)
@@ -239,6 +247,7 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
+(setq inhibit-compacting-font-caches t) ; Fix slow Unicode rendering.
 (setq default-abbrev-mode t)
 (setq inhibit-startup-message t)
 (setq line-move-visual nil)
@@ -281,8 +290,6 @@
                             (unless (buffer-modified-p)
                                 (if (buffer-file-name)
                                     (save-buffer)))))
-
-(run-with-idle-timer 360 t 'recentf-save-list)
 
 (setq auto-mode-alist
       (append '(
@@ -360,41 +367,41 @@
 
 ; face
 
-(run-at-time
- 20 nil
- (lambda ()
-   (if (eq system-type 'darwin)
-       (progn
-         (with-demoted-errors "error: %s"
-           (set-fontset-font "fontset-default" 'japanese-jisx0208 (font-spec :family "Noto Serif CJK JP"))
-           (set-fontset-font "fontset-default" '(#x3000 . #x30ff) (font-spec :family "Noto Serif CJK JP"))
-           )
+;; (run-at-time
+;;  20 nil
+;;  (lambda ()
+;;    (if (eq system-type 'darwin)
+;;        (progn
+;;          (with-demoted-errors "error: %s"
+;;            (set-fontset-font "fontset-default" 'japanese-jisx0208 (font-spec :family "Noto Serif CJK JP"))
+;;            (set-fontset-font "fontset-default" '(#x3000 . #x30ff) (font-spec :family "Noto Serif CJK JP"))
+;;            )
 
-         (with-demoted-errors "error: %s"
-           (create-fontset-from-fontset-spec "-*-DejaVu Serif-normal-normal-normal-*-*-*-*-*-p-*-fontset-text")
-           (set-fontset-font "fontset-text" 'japanese-jisx0208 (font-spec :family "Noto Serif CJK JP"))
-           (set-fontset-font "fontset-text" '(#x3000 . #x30ff) (font-spec :family "Noto Serif CJK JP"))
-           (set-face-attribute 'variable-pitch nil :font "fontset-text")
-           (set-face-font 'variable-pitch "fontset-text")
-           )
-         )
-     (progn
-       (with-demoted-errors "error: %s"
-         (set-fontset-font "fontset-default" 'japanese-jisx0208 (font-spec :family "IPAexMincho"))
-         (set-fontset-font "fontset-default" '(#x3000 . #x30ff) (font-spec :family "IPAexMincho"))
-         )
+;;          (with-demoted-errors "error: %s"
+;;            (create-fontset-from-fontset-spec "-*-DejaVu Serif-normal-normal-normal-*-*-*-*-*-p-*-fontset-text")
+;;            (set-fontset-font "fontset-text" 'japanese-jisx0208 (font-spec :family "Noto Serif CJK JP"))
+;;            (set-fontset-font "fontset-text" '(#x3000 . #x30ff) (font-spec :family "Noto Serif CJK JP"))
+;;            (set-face-attribute 'variable-pitch nil :font "fontset-text")
+;;            (set-face-font 'variable-pitch "fontset-text")
+;;            )
+;;          )
+;;      (progn
+;;        (with-demoted-errors "error: %s"
+;;          (set-fontset-font "fontset-default" 'japanese-jisx0208 (font-spec :family "IPAexMincho"))
+;;          (set-fontset-font "fontset-default" '(#x3000 . #x30ff) (font-spec :family "IPAexMincho"))
+;;          )
 
-       (with-demoted-errors "error: %s"
-         (create-fontset-from-fontset-spec "-*-DejaVu Serif-normal-normal-normal-*-*-*-*-*-*-*-fontset-text")
-         (set-fontset-font "fontset-text" 'japanese-jisx0208 (font-spec :family "IPAexMincho"))
-         (set-fontset-font "fontset-text" '(#x3000 . #x30ff) (font-spec :family "IPAexMincho"))
-         (set-face-attribute 'variable-pitch nil :font "fontset-text")
-         (set-face-font 'variable-pitch "fontset-text")
-         )
-       )
-     )
-   )
- )
+;;        (with-demoted-errors "error: %s"
+;;          (create-fontset-from-fontset-spec "-*-DejaVu Serif-normal-normal-normal-*-*-*-*-*-*-*-fontset-text")
+;;          (set-fontset-font "fontset-text" 'japanese-jisx0208 (font-spec :family "IPAexMincho"))
+;;          (set-fontset-font "fontset-text" '(#x3000 . #x30ff) (font-spec :family "IPAexMincho"))
+;;          (set-face-attribute 'variable-pitch nil :font "fontset-text")
+;;          (set-face-font 'variable-pitch "fontset-text")
+;;          )
+;;        )
+;;      )
+;;    )
+;;  )
 
 ;; my Functions
 
@@ -561,6 +568,10 @@
 
 (with-eval-after-load 'lsp-mode
   (add-hook 'python-mode-hook 'lsp)
+  (add-hook 'rjsx-mode-hook 'lsp)
+  (add-hook 'typescript-mode-hook 'lsp)
+  (add-hook 'go-mode-hook 'lsp)
+  (add-hook 'c++-mode-hook 'lsp)
   )
 
 (with-eval-after-load 'helm
@@ -682,8 +693,13 @@
   )
 
 (with-eval-after-load 'prettier-js
-  (add-hook 'rjsx-mode 'prettier-js-mode)
+  (add-hook 'rjsx-mode-hook 'prettier-js-mode)
+  (add-hook 'typescript-mode-hook 'prettier-js-mode)
   ;; (add-hook 'prettier-js-mode-hook (lambda () (add-hook 'auto-save-hook 'prettier-js nil 'local)))
+  )
+
+(with-eval-after-load 'recentf
+  (run-with-idle-timer 60 t 'recentf-save-list)
   )
 
 (with-eval-after-load 'reftex-ref
@@ -735,9 +751,9 @@
 (with-eval-after-load 'rjsx-mode
   (setq auto-mode-alist
         (append '(
+                  ;; ("\\.ts$" . rjsx-mode)
+                  ;; ("\\.tsx$" . rjsx-mode)
                   ("\\.js$" . rjsx-mode)
-                  ("\\.ts$" . rjsx-mode)
-                  ("\\.tsx$" . rjsx-mode)
                   )
                 auto-mode-alist))
   )
@@ -827,6 +843,15 @@
   (define-key sql-mode-map (kbd "C-c >") 'my-sql-indent-shift-right)
   )
 
+(with-eval-after-load 'typescript-mode
+  (setq auto-mode-alist
+        (append '(
+                  ("\\.ts$" . typescript-mode)
+                  ("\\.tsx$" . typescript-mode)
+                  )
+                auto-mode-alist))
+  )
+
 (with-eval-after-load 'undo-tree
   (global-undo-tree-mode t)
   (define-key undo-tree-map (kbd "M-_") 'undo-tree-redo)
@@ -869,7 +894,9 @@
 
 ; activate essential packages
 ;; (require 'elpy nil t)
+(require 'adoc-mode nil t)
 (require 'blacken nil t)
+;; (require 'ccls nil t)
 (require 'gnuplot nil t)
 (require 'helm nil t)
 (require 'flycheck nil t)
@@ -895,16 +922,19 @@
 (require 'dumb-jump nil t)
 (require 'sql nil t)
 (require 'rjsx-mode nil t)
+(require 'recentf-ext nil t)
 (require 'prettier-js nil t)
+(require 'typescript-mode nil t)
 
 (defun initial-setup ()
-  (interactive)
   (package-refresh-contents)
   (dolist (pkg '(
                  blacken
                  company
                  company-lsp
+                 ;; company-jedi
                  dumb-jump
+                 ;; elpy
                  flycheck
                  gnuplot
                  helm
@@ -918,9 +948,11 @@
                  paredit
                  prettier-js
                  rjsx-mode
+                 recentf-ext
                  undo-tree
                  writegood-mode
                  yasnippet
+                 typescript-mode
                  ))
     (unless (package-installed-p pkg)
       (message (symbol-name pkg))
