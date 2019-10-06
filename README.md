@@ -1,4 +1,10 @@
 ```bash
+git clone https://github.com/kshramt/dotfile_w.git ~/d/dotfile
+~/d/dotfile/oci_ubuntu1804/setup.sh
+source ~/.bashrc
+```
+
+```bash
 mkdir -p d/p
 cd d/p
 git clone https://github.com/kshramt/bin.git
