@@ -11,7 +11,7 @@ else
 fi
 export PROMPT_COMMAND="${PROMPT_COMMAND:-:} ; { echo \"#\$(date +%s)\" ; echo \"\$(hostname)\" \"\$PWD\"; } >> \"\$HOME\"/.bash_location"
 
-export LANG=ja_JP.UTF-8
+export LANG=C.UTF-8
 export TERM=xterm-256color
 export EDITOR='em'
 
