@@ -54,7 +54,7 @@ EOF
 
 sudo add-apt-repository ppa:kelleyk/emacs
 sudo apt update
-sudo apt install tig tree emacs26 python3-venv python3.7-venv
+sudo apt install tig tree emacs26 python3-venv python3.7-venv nodejs
 
 emacs --batch --load ~/.emacs.d/init.el --eval '(initial-setup)'
 
