@@ -55,7 +55,15 @@ EOF
 sudo add-apt-repository ppa:kelleyk/emacs
 sudo apt update
 sudo apt remove  -y snapd
-sudo apt install -y tig tree emacs26 python3-venv python3.7-venv python3.7-dev nodejs gcc g++ npm golang-go jq systemd-docker
+sudo apt install -y tig tree emacs26 python3-venv python3.7-venv python3.7-dev nodejs gcc g++ npm jq systemd-docker
+
+mkdir -p ~/.local
+pushd ~/.local
+wget https://dl.google.com/go/go1.13.3.linux-amd64.tar.gz
+tar xfv go1.13.3.linux-amd64.tar.gz
+mv go go1.13.3.linux-amd64
+ln -s go1.13.3.linux-amd64 go
+popd
 
 emacs --batch --load ~/.emacs.d/init.el --eval '(initial-setup)'
 
