@@ -165,6 +165,9 @@ export PATH="$HOME"/usr/local/bin:"$HOME"/.local/bin:"$PATH"
 
 export HOMEBREW_NO_ANALYTICS=1
 
+# Go
+export PATH="$HOME"/.local/go/bin
+
 # Conda
 f="$HOME"/miniconda3/etc/profile.d/conda.sh
 if [[ -f "$f" ]]; then
