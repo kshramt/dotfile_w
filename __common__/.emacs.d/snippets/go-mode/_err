@@ -2,5 +2,4 @@
 # name: err
 # key: _err
 # --
-if err!=nil{log.Panic(err)}
-$0
+if err!=nil{log.Panic(err)};$0
