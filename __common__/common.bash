@@ -167,6 +167,7 @@ export HOMEBREW_NO_ANALYTICS=1
 
 # Go
 export PATH="$HOME"/.local/go/bin:"$PATH"
+export PATH="$HOME"/go/bin:"$PATH"
 
 # Conda
 f="$HOME"/miniconda3/etc/profile.d/conda.sh
