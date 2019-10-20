@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: err
+# key: _err
+# --
+if err!=nil{log.Panic(err)}
+$0
