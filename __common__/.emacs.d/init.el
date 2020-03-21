@@ -527,6 +527,13 @@
                 auto-mode-alist))
   )
 
+(define-key c++-mode-map (kbd "<f5>") 'compile)
+(add-hook 'c++-mode-hook
+          (lambda ()
+            (setq-local compile-command "scan-build make -k")
+            (setq-local compilation-read-command nil)
+            ))
+
 (with-eval-after-load 'irony
   (add-hook 'c++-mode-hook 'irony-mode)
   (add-hook 'c-mode-hook 'irony-mode)
