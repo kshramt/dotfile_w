@@ -25,12 +25,15 @@ pushd ~
 
 git clone https://github.com/kshramt/bin.git ~/d/p/bin
 
-~/d/p/bin/bak ~/.bash_history ~/.bash_logout ~/.bashrc ~/.profile
-~/d/p/bin/tsh ~/.bash_history ~/.bash_logout ~/.bashrc ~/.profile
+
+for f in ~/.bash_history ~/.bash_logout ~/.bashrc ~/.profile
+do
+   { ~/d/p/bin/bak "$f" && ~/d/p/bin/tsh "$f" ; } || echo fail "$f"
+done
 
 for f in .bash_profile .bashrc .config .emacs.d .inputrc .tmux.conf
 do
-   ln -s dotfile/"$f"
+   {~/d/p/bin/tsh "$f" && ln -s dotfile/"$f" ; } || echo fail "$f"
 done
 
 cat <<EOF > ~/.gitconfig
