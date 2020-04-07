@@ -33,7 +33,7 @@ done
 
 for f in .bash_profile .bashrc .config .emacs.d .inputrc .tmux.conf
 do
-   {~/d/p/bin/tsh "$f" && ln -s dotfile/"$f" ; } || echo fail "$f"
+   { ~/d/p/bin/tsh "$f" && ln -s dotfile/"$f" ; } || echo fail "$f"
 done
 
 cat <<EOF > ~/.gitconfig
