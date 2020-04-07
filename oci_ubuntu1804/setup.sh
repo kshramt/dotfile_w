@@ -10,7 +10,7 @@ export IFS=$' \t\n'
 export LANG=en_US.UTF-8
 umask u=rwx,g=,o=
 
-readonly dir="$(readlink -f "${0%/*}")"
+readonly dir="$(readlink -f "$(dirname "$0")")"
 readonly tmp_dir="$(mktemp -d)"
 
 finalize(){
