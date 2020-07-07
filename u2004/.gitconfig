@@ -1,0 +1,17 @@
+[color]
+	ui = auto
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	nffm = merge --no-ff
+	wdiff = diff --word-diff -w
+[github]
+	user = kshramt
+[core]
+	quotepath = false
+[merge]
+	tool = meld
+[pack]
+	threads = 1
