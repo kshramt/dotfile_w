@@ -5,6 +5,8 @@ export PATH="$HOME/d/p/bin:$PATH"
 export XMODIFIERS=@im=fcitx
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
+f="$HOME"/d/h/venv/bin/activate && [[ -f "$f" ]] && source "$f"
+
 
 if [[ -n "$TMUX" ]] && [[ -z "${MY_LOGGING_TMUX:-}" ]]; then
    export MY_LOGGING_TMUX="$$"
