@@ -507,6 +507,11 @@
   (elpy-enable)
   )
 
+(with-eval-after-load 'emmet-mode
+  (setq emmet-expand-jsx-className? t)
+  (define-key emmet-mode-keymap (kbd "C-j") nil)
+  )
+
 (add-hook 'eww-mode-hook
           (lambda ()
             (setq show-trailing-whitespace nil)
