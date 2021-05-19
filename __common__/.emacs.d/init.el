@@ -879,6 +879,8 @@
                   ("\\.tsx$" . typescript-mode)
                   )
                 auto-mode-alist))
+  (add-hook 'typescript-mode-hook
+            (lambda () (setq-local electric-layout-rules '())))
   )
 
 (with-eval-after-load 'undo-tree
