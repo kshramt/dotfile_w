@@ -785,6 +785,8 @@
                   ("\\.js$" . rjsx-mode)
                   )
                 auto-mode-alist))
+  (add-hook 'rjsx-mode-hook
+            (lambda () (setq-local electric-layout-rules '())))
   )
 
 (with-eval-after-load 'scheme-mode
