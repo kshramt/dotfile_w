@@ -126,6 +126,7 @@
  '(lsp-auto-guess-root t)
  '(lsp-prefer-flymake nil)
  '(lsp-ui-doc-enable nil)
+ '(lsp-terraform-server '("terraform-ls" "serve"))
  '(magit-auto-revert-immediately nil)
  '(magit-auto-revert-mode nil)
  '(magit-blame-arguments (quote ("-w" "-C" "-C" "-C" "-M")))
