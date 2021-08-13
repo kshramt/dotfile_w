@@ -10,7 +10,6 @@ import logging
 import os
 import pickle
 import sys
-import time
 
 # import pickle
 
@@ -81,6 +80,7 @@ def _add_handlers(logger, paths, level_stderr=logging.INFO, level_path=logging.D
     fmt = logging.Formatter(
         "%(levelname)s\t%(process)d\t%(asctime)s\t%(pathname)s\t%(funcName)s\t%(lineno)d\t%(message)s"
     )
+    # import time
     # import pythonjsonlogger
     # fmt = pythonjsonlogger.jsonlogger.JsonFormatter(
     #     "%(levelname) %(process) %(thread) %(asctime) %(pathname) %(funcName) %(lineno) %(message)"
