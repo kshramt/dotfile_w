@@ -10,6 +10,7 @@ import logging
 import os
 import pickle
 import sys
+import time
 
 # import pickle
 
@@ -77,14 +78,19 @@ def _parse_argv(argv):
 
 
 def _add_handlers(logger, paths, level_stderr=logging.INFO, level_path=logging.DEBUG):
-    logger.setLevel(logging.DEBUG)
     fmt = logging.Formatter(
-        "%(levelname)s\t%(process)d\t%(asctime)s\t%(filename)s\t%(funcName)s\t%(lineno)d\t%(message)s"
+        "%(levelname)s\t%(process)d\t%(asctime)s\t%(pathname)s\t%(funcName)s\t%(lineno)d\t%(message)s"
     )
+    # import pythonjsonlogger
+    # fmt = pythonjsonlogger.jsonlogger.JsonFormatter(
+    #     "%(levelname) %(process) %(thread) %(asctime) %(pathname) %(funcName) %(lineno) %(message)"
+    # )
+    # fmt.converter = time.gmtime
 
     hdl = logging.StreamHandler(sys.stderr)
     hdl.setFormatter(fmt)
     hdl.setLevel(level_stderr)
+    logger.setLevel(logging.DEBUG)
     logger.addHandler(hdl)
 
     for path in paths:
