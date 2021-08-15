@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 def main(argv):
     args = _parse_argv(argv[1:])
     _add_handlers(logger, [args.log_file], level_stderr=args.log_level)
-    logger.debug("args\t%s", args)
+    logger.debug(dict(args=args))
     run(args)
 
 
@@ -35,7 +35,7 @@ def run(args):
 
 
 def _parse_argv(argv):
-    logger.debug("argv\t%s", argv)
+    logger.debug(dict(argv=argv))
     doc = f"""
     {__file__}
     """
@@ -72,7 +72,7 @@ def _parse_argv(argv):
     args = parser.parse_args(argv)
     if args.args is not None:
         args = load_pickle(args.args)
-    logger.debug("args\t%s", args)
+    logger.debug(dict(args=args))
     return args
 
 
@@ -83,10 +83,13 @@ def _add_handlers(logger, paths, level_stderr=logging.INFO, level_path=logging.D
     # import time
     # import pythonjsonlogger.jsonlogger
     # fmt = pythonjsonlogger.jsonlogger.JsonFormatter(
-    #     "%(levelname) %(processName) %(process) %(threadName) %(thread) %(asctime) %(pathname) %(funcName) %(lineno) %(message)",
+    #     "%(levelname) %(asctime) %(message) %(processName) %(process) %(threadName) %(thread) %(pathname) %(module) %(funcName) %(lineno)",
     #     json_ensure_ascii=False,
+    #     rename_fields=dict(asctime="timestamp", levelname="severity")
     # )
-    # fmt.converter = time.gmtime
+    fmt.converter = time.gmtime
+    fmt.default_time_format = "%Y-%m-%dT%H:%M:%S"
+    fmt.default_msec_format = "%s.%03dZ"
 
     hdl = logging.StreamHandler(sys.stderr)
     hdl.setFormatter(fmt)
@@ -101,7 +104,7 @@ def _add_handlers(logger, paths, level_stderr=logging.INFO, level_path=logging.D
         hdl.setLevel(level_path)
         logger.addHandler(hdl)
 
-    logger.info("log files\t%s", paths)
+    logger.info(dict(log_files=paths))
     return logger
 
 
