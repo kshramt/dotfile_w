@@ -80,13 +80,13 @@ def _add_handlers(logger, paths, level_stderr=logging.INFO, level_path=logging.D
     fmt = logging.Formatter(
         "%(levelname)s\t%(process)d\t%(asctime)s\t%(pathname)s\t%(funcName)s\t%(lineno)d\t%(message)s"
     )
-    # import time
     # import pythonjsonlogger.jsonlogger
     # fmt = pythonjsonlogger.jsonlogger.JsonFormatter(
     #     "%(levelname) %(asctime) %(message) %(processName) %(process) %(threadName) %(thread) %(pathname) %(module) %(funcName) %(lineno)",
     #     json_ensure_ascii=False,
     #     rename_fields=dict(asctime="timestamp", levelname="severity")
     # )
+    import time
     fmt.converter = time.gmtime
     fmt.default_time_format = "%Y-%m-%dT%H:%M:%S"
     fmt.default_msec_format = "%s.%03dZ"
