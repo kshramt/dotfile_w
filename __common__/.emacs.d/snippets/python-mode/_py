@@ -83,7 +83,7 @@ def _add_handlers(logger, paths, level_stderr=logging.INFO, level_path=logging.D
     # import time
     # import pythonjsonlogger
     # fmt = pythonjsonlogger.jsonlogger.JsonFormatter(
-    #     "%(levelname) %(process) %(thread) %(asctime) %(pathname) %(funcName) %(lineno) %(message)",
+    #     "%(levelname) %(processName) %(process) %(threadName) %(thread) %(asctime) %(pathname) %(funcName) %(lineno) %(message)",
     #     json_ensure_ascii=False,
     # )
     # fmt.converter = time.gmtime
