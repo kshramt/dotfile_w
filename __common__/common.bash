@@ -179,3 +179,18 @@ fi
 if which direnv &> /dev/null; then
    eval "$(direnv hook bash)"
 fi
+
+# Kubernetes
+if which kubectl > /dev/null ; then
+   source <(kubectl completion bash)
+   alias k=kubectl
+   complete -F __start_kubectl k
+fi
+
+if which kind > /dev/null ; then
+   source <(kind completion bash)
+fi
+
+if which minikube > /dev/null ; then
+   source <(minikube completion bash)
+fi
