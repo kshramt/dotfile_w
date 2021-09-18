@@ -126,6 +126,7 @@
  '(lsp-auto-guess-root t)
  '(lsp-prefer-flymake nil)
  '(lsp-ui-doc-enable nil)
+ '(lsp-terraform-server '("terraform-ls" "serve"))
  '(magit-auto-revert-immediately nil)
  '(magit-auto-revert-mode nil)
  '(magit-blame-arguments (quote ("-w" "-C" "-C" "-C" "-M")))
@@ -601,6 +602,7 @@
   (add-hook 'typescript-mode-hook 'lsp)
   (add-hook 'go-mode-hook 'lsp)
   (add-hook 'c++-mode-hook 'lsp)
+  (add-hook 'terraform-mode-hook 'lsp)
   )
 
 (with-eval-after-load 'helm
@@ -918,6 +920,7 @@
   (add-hook 'html-mode-hook #'yas-minor-mode-on)
   (add-hook 'julia-mode-hook #'yas-minor-mode-on)
   (add-hook 'LaTeX-mode-hook #'yas-minor-mode-on)
+  (add-hook 'terraform-mode-hook 'yas-minor-mode-on)
   (add-hook 'LaTeX-mode-hook #'prettify-symbols-mode)
   )
 
