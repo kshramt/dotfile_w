@@ -10,6 +10,7 @@ import logging
 import os
 import pickle
 import sys
+import urllib
 
 # import pickle
 
@@ -117,7 +118,10 @@ def dirname(path):
 
 
 def jp(path, *more):
-    return os.path.normpath(os.path.sep.join((path, os.path.sep.join(more))))
+    puri = urllib.parse.urlparse(os.path.sep.join((path, os.path.sep.join(more))))
+    return urllib.parse.ParseResult(
+        **{**puri._asdict(), **dict(path=os.path.normpath(puri.path))}
+    ).geturl()
 
 
 def load_pickle(path):

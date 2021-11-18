@@ -9,9 +9,9 @@ mkdir -p d/p
 cd d/p
 git clone https://github.com/kshramt/bin.git
 cd ~/d
-git clone https://github.com/kshramt/dotfile_w.git
+git clone https://github.com/kshramt/dotfile_w.git dotfile
 cd ~
-ln -s ~/d/dotfile_w/w1 dotfile
+ln -s ~/d/dotfile/w1 dotfile
 
 for f in .bashrc .bash_profile .tmux.conf .inputrc .emacs.d .config
 do
