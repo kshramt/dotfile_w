@@ -336,7 +336,8 @@
 
 (add-hook 'python-mode-hook
           (lambda ()
-            t
+            (setq-local forward-sexp-function nil)
+            (setq-local backward-sexp-function nil)
             ))
 
 (setq recentf-keep (list (lambda (file) t)))
