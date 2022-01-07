@@ -53,8 +53,6 @@
  '(desktop-restore-eager 1)
  '(desktop-save-mode t)
  '(display-line-numbers t)
- '(dumb-jump-mode t)
- '(dumb-jump-selector (quote helm))
  '(echo-keystrokes 0)
  '(eldoc-idle-delay 0.5)
  '(electric-indent-mode nil)
@@ -501,8 +499,8 @@
   )
 
 (with-eval-after-load 'dumb-jump
-  (global-set-key (kbd "M-k") 'dumb-jump-go)
-  (global-set-key (kbd "M-p") 'dumb-jump-back)
+  ;; (global-set-key (kbd "M-k") 'dumb-jump-go)
+  ;; (global-set-key (kbd "M-p") 'dumb-jump-back)
   )
 
 (with-eval-after-load 'elpy
@@ -612,13 +610,13 @@
     candidates)
   (advice-add 'helm-buffers-sort-transformer :around 'helm-buffers-sort-transformer@donot-sort)
 
-  (global-set-key (kbd "M-@") 'helm-mini)
+  (global-set-key (kbd "M-p") 'helm-mini)
   (global-set-key (kbd "M-y") 'helm-show-kill-ring)
   (global-set-key (kbd "M-x") 'helm-M-x)
   (define-key helm-map (kbd "M-g") 'helm-keyboard-quit)
   (define-key helm-map (kbd "C-h") 'delete-backward-char)
 
-  (define-key my-key-minor-mode-map (kbd "M-@") 'helm-mini)
+  (define-key my-key-minor-mode-map (kbd "M-p") 'helm-mini)
   )
 
 (with-eval-after-load 'helm-git-grep
@@ -956,7 +954,7 @@
   (setq auto-mode-alist (cons '("\\.jl$" . julia-mode) auto-mode-alist)))
 (require 'merlin nil t)
 (require 'writegood-mode nil t)
-(require 'dumb-jump nil t)
+;; (require 'dumb-jump nil t)
 (require 'sql nil t)
 (require 'rjsx-mode nil t)
 (require 'recentf-ext nil t)
@@ -970,7 +968,7 @@
                  company
                  company-lsp
                  ;; company-jedi
-                 dumb-jump
+                 ;; dumb-jump
                  ;; elpy
                  flycheck
                  gnuplot
