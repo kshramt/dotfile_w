@@ -610,13 +610,13 @@
     candidates)
   (advice-add 'helm-buffers-sort-transformer :around 'helm-buffers-sort-transformer@donot-sort)
 
-  (global-set-key (kbd "M-p") 'helm-mini)
+  (global-set-key (kbd "M-j") 'helm-mini)
   (global-set-key (kbd "M-y") 'helm-show-kill-ring)
   (global-set-key (kbd "M-x") 'helm-M-x)
   (define-key helm-map (kbd "M-g") 'helm-keyboard-quit)
   (define-key helm-map (kbd "C-h") 'delete-backward-char)
 
-  (define-key my-key-minor-mode-map (kbd "M-p") 'helm-mini)
+  (define-key my-key-minor-mode-map (kbd "M-j") 'helm-mini)
   )
 
 (with-eval-after-load 'helm-git-grep
