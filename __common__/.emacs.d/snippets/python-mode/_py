@@ -100,10 +100,10 @@ def _add_handlers(logger, paths, level_stderr=logging.INFO, level_path=logging.D
 
     for path in paths:
         mkdir(dirname(path))
-        hdl = logging.FileHandler(path)
-        hdl.setFormatter(fmt)
-        hdl.setLevel(level_path)
-        logger.addHandler(hdl)
+        hdl_ = logging.FileHandler(path)
+        hdl_.setFormatter(fmt)
+        hdl_.setLevel(level_path)
+        logger.addHandler(hdl_)
 
     logger.info(dict(log_files=paths))
     return logger
