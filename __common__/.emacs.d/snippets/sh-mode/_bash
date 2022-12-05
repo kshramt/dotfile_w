@@ -22,11 +22,11 @@ usage_and_exit(){
    exit "\${1:-1}"
 }
 
-readonly dir="\${0%/*}"
+readonly dir="\$(dirname "\$0")"
 readonly tmp_dir="\$(mktemp -d)"
 
 finalize(){
-   rm -fr "\$tmp_dir"
+   rm -fr "\${tmp_dir}"
 }
 
 trap finalize EXIT
