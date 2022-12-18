@@ -222,6 +222,10 @@
  '(mode-line-buffer-id ((t (:weight normal))))
  '(mode-line-inactive ((t (:inherit mode-line :background "grey99" :foreground "grey20" :box (:line-width -1 :color "grey75") :weight light)))))
 
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+
 (ffap-bindings)
 
 (when (eq system-type 'darwin)
