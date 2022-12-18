@@ -160,6 +160,7 @@ export PATH="$HOME"/usr/local/texlive/2017/bin/x86_64-darwin:"$PATH"
 # Local
 export MANPATH="$HOME"/usr/local/share/man:"$MANPATH"
 export PATH="$HOME"/usr/local/bin:"$HOME"/.local/bin:"$PATH"
+export PATH="${HOME}/my/bin:${PATH}"
 
 # HomeBrew
 
